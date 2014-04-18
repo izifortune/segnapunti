@@ -24,17 +24,26 @@ angular.module('starter.controllers', [])
 })
 
 .controller('NewgameCtrl', function($scope, $stateParams) {
-    $scope.team1Score = 0;
-    $scope.team2Score = 0;
+    $scope.p1Score = 0;
+    $scope.p2Score = 0;
+
+    $scope.p1SetCount = 0;
+    $scope.p2SetCount = 0;
+
     $scope.form1 = {};
     $scope.form2 = {};
+
+    $scope.sets = [];
 
     // $scope.tmp1Score = 0;
     // $scope.tmp2Score = 0;
 
-    $scope.plusTeam1Score = function(){
+    $scope.plusp1Score = function(){
         if (Number($scope.form1.score)) {
-            $scope.team1Score = $scope.team1Score + Number($scope.form1.score);
+            $scope.p1Score = $scope.p1Score + Number($scope.form1.score);
+            if ($scope.p1Score < 0) {
+                $scope.p1Score = 0;
+            }
             $scope.form1.score = '';
         }
         else {
@@ -42,19 +51,13 @@ angular.module('starter.controllers', [])
         }
     };
 
-    $scope.minusTeam1Score = function(){
-        if (Number($scope.form1.score)) {
-            $scope.team1Score = $scope.team1Score - Number($scope.form1.score);
-            $scope.form1.score = '';
-        }
-        else {
-            $scope.form1.score = '';
-        }
-    };
 
-    $scope.plusTeam2Score = function(){
+    $scope.plusp2Score = function(){
         if (Number($scope.form2.score)) {
-            $scope.team2Score = $scope.team2Score + Number($scope.form2.score);
+            $scope.p2Score = $scope.p2Score + Number($scope.form2.score);
+            if ($scope.p2Score < 0) {
+                $scope.p2Score = 0;
+            }
             $scope.form2.score = '';
         }
         else {
@@ -62,13 +65,26 @@ angular.module('starter.controllers', [])
         }
     };
 
-    $scope.minusTeam2Score = function(){
-        if (Number($scope.form2.score)) {
-            $scope.team2Score = $scope.team2Score - Number($scope.form2.score);
-            $scope.form2.score = '';
-        }
-        else {
-            $scope.form2.score = '';
-        }
+    $scope.addSetP1 = function() {
+        $scope.p1SetCount = $scope.p1SetCount + 1;
+        $scope.sets.push({
+            p1Score: $scope.p1Score,
+            p2Score: $scope.p2Score,
+            win: true,
+        });
     };
+
+    $scope.addSetP2 = function() {
+        $scope.p2SetCount = $scope.p2SetCount + 1;
+        $scope.sets.push({
+            p1Score: $scope.p1Score,
+            p2Score: $scope.p2Score,
+            win: false,
+        });
+    };
+
+    $scope.endGame = function() {
+
+    };
+
 });
