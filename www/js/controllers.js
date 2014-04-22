@@ -65,6 +65,27 @@ angular.module('starter.controllers', [])
         }
     };
 
+    $scope.finalScore = function() {
+        if($scope.p1Score > $scope.p2Score) {
+            $scope.p1SetCount = $scope.p1SetCount +1;
+        }else if ($scope.p2Score > $scope.p1Score){
+            $scope.p2SetCount = $scope.p2SetCount +1;
+        }else{
+            return;
+        }
+
+        $scope.sets.push({
+            p1Score: $scope.p1Score,
+            p2Score: $scope.p2Score,
+            //win: true,
+        });
+
+        $scope.p1Score = 0;
+        $scope.form1.score = '';
+        $scope.p2Score = 0;
+        $scope.form2.score = '';
+    }
+
     $scope.addSetP1 = function() {
         $scope.p1SetCount = $scope.p1SetCount + 1;
         $scope.sets.push({
