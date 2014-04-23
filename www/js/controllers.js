@@ -2,17 +2,21 @@
 
 angular.module('starter.controllers', [])
 
+.factory('DatiPartita', function () {
+    return {
+        Giocatori:     [ {giocatore:'Pippo'}, {giocatore:'pluto' } ],
+        GetNomi: function () {
+            return this.Giocatori;
+        },
+    }
+})
+
 .controller('AppCtrl', function($scope) {
 })
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
   ];
 
   $scope.newGame = function() {
@@ -22,6 +26,17 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
+
+.controller('GameDataCtrl', function($scope, $stateParams) {
+    $scope.names = ['-','-'];
+
+    $scope.addNames = function(){
+        // aggiungi i nomi al vettore
+        console.log($scope.names);
+    };
+})
+
+
 
 .controller('NewgameCtrl', function($scope, $stateParams) {
     $scope.p1Score = 0;
@@ -34,9 +49,6 @@ angular.module('starter.controllers', [])
     $scope.form2 = {};
 
     $scope.sets = [];
-
-    // $scope.tmp1Score = 0;
-    // $scope.tmp2Score = 0;
 
     $scope.plusp1Score = function(){
         if (Number($scope.form1.score)) {
