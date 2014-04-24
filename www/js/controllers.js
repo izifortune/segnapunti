@@ -1,7 +1,14 @@
 'use strict';
 
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngStorage'])
 
+.controller('StorageCtrl', function(
+    $scope,
+    $localStorage,
+    $sessionStorage
+){
+
+})
 
 .controller('AppCtrl', function($scope) {
 })
@@ -19,7 +26,8 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
-.controller('GameDataCtrl', function($scope, $stateParams) {
+// passo anche i parametri dello storage
+.controller('GameDataCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
     $scope.names = [];
 
     // se nello storage non c'è nulla inizializziamo
@@ -37,11 +45,7 @@ angular.module('starter.controllers', [])
                 'data'  : $scope.data,
             });
             // buttare names nello storage
-<<<<<<< HEAD
-            console.log($scope.names);
-=======
             //console.log($scope.names);
->>>>>>> myChanges
         }else{
             alert('Inserisci i nomi');
         }

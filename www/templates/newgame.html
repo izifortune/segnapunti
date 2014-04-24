@@ -10,7 +10,7 @@
     <div class="item item-text-wrap">
     <div class="row">
       <div class="col">
-          <h3 class="balanced">P1</h3>
+          <h3 class="balanced">P1 {{giocatore1.text}} </h3>
       </div>
       <div class="col col-50">
        <h1>{{p1Score}}</h1>
@@ -30,7 +30,7 @@
     <div class="item item-text-wrap">
       <div class="row">
         <div class="col">
-            <h3 class="assertive">P2</h3>
+            <h3 class="assertive">P2 {{giocatore2.text}}</h3>
         </div>
         <div class="col col-50">
          <h1>{{p2Score}}</h1>
@@ -46,13 +46,20 @@
       </label>
       <button ng-click="plusp2Score()" class="button button-small icon-center ion-plus button-balanced">
       </button>
-    </div>
-      
-    <div class="item">
-    <ion-list>
-    <ion-item href="#/app/newgame/gamedata">Metadati partita</ion-item>
-    </ion-list>
-    </div>
+  </div>
+  <div class="card">
+          <label class="item item-divider">
+              Giocatore 1 : <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore1.text" />
+          </label>
+          <label class="item item-divider">
+              Giocatore 2 : <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore2.text" />
+          </label>
+  </div>
+    <!--<div class="item">-->
+    <!--<ion-list>-->
+    <!--<ion-item href="#/app/newgame/gamedata">Metadati partita</ion-item>-->
+    <!--</ion-list>-->
+    <!--</div>-->
 
   </div>
   </ion-content>
