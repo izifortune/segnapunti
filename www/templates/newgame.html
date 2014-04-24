@@ -10,7 +10,7 @@
     <div class="item item-text-wrap">
     <div class="row">
       <div class="col">
-          <h3 class="balanced">P1</h3>
+          <h3 class="balanced">P1 {{giocatore1.text}} </h3>
       </div>
       <div class="col col-50">
        <h1>{{p1Score}}</h1>
@@ -24,13 +24,19 @@
       <label class="item-input-wrapper">
         <input type="number" placeholder="Inserisci il punteggio" ng-model="form1.score">
       </label>
-      <button ng-click="plusp1Score()" class="button button-small icon-center ion-plus button-balanced">
-      </button>
+
+      <div class="col">
+          <button ng-click="plusp1Score()" class="button button-small icon-center ion-plus button-balanced"></button>
+      </div>
+      <div class="col">
+          <select ng-model="p1ScoreOrig" ng-options="tipo.label for tipo in tipopunteggio"></select>
+      </div>
+
     </label>
     <div class="item item-text-wrap">
       <div class="row">
         <div class="col">
-            <h3 class="assertive">P2</h3>
+            <h3 class="assertive">P2 {{giocatore2.text}}</h3>
         </div>
         <div class="col col-50">
          <h1>{{p2Score}}</h1>
@@ -44,15 +50,31 @@
       <label class="item-input-wrapper">
         <input type="number" placeholder="Inserisci il punteggio" ng-model="form2.score">
       </label>
-      <button ng-click="plusp2Score()" class="button button-small icon-center ion-plus button-balanced">
-      </button>
-    </div>
-      
-    <div class="item">
-    <ion-list>
-    <ion-item href="#/app/newgame/gamedata">Metadati partita</ion-item>
-    </ion-list>
-    </div>
+      <div class="col">
+          <button ng-click="plusp2Score()" class="button button-small icon-center ion-plus button-balanced"></button>
+      </div>
+      <div class="col">
+          <select ng-model="p2ScoreOrig" ng-options="tipo.label for tipo in tipopunteggio"></select>
+      </div>
+  </div>
+  <div>
+      <div class="card">
+          <label class="item item-divider">
+              Giocatore 1 : <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore1.text" />
+          </label>
+          <label class="item item-divider">
+              Giocatore 2 : <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore2.text" />
+          </label>
+          <div class="buttons">
+              <button ng-click="addNames()" class="button button-small icon-center ">Salva</button>
+          </div>
+      </div>
+  </div>
+    <!--<div class="item">-->
+    <!--<ion-list>-->
+    <!--<ion-item href="#/app/newgame/gamedata">Metadati partita</ion-item>-->
+    <!--</ion-list>-->
+    <!--</div>-->
 
   </div>
   </ion-content>
@@ -61,7 +83,7 @@
         <button ng-click="finalScore()" class="button button-small icon-center ">Fine set</button>
     </div>
     <h1 class="title"></h1>
-    <div class="buttons" ng-click="doSomething()">
+    <div class="buttons" ng-click="endGame()">
       <button class="button">FINE PARTITA</button>
     </div>
   </ion-footer-bar>
