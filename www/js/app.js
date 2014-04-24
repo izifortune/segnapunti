@@ -4,7 +4,13 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ngStorage'])
+
+.controller('StorageCtrl', function(
+    $scope,
+    $localStorage,
+    $sessionStorage
+){})
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -25,7 +31,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       controller: 'AppCtrl'
     })
 
-
     .state('app.browse', {
       url: "/browse",
       views: {
@@ -34,6 +39,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+
     .state('app.playlists', {
       url: "/playlists",
       views: {
@@ -43,6 +49,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+
     .state('app.newgame', {
       url: '/newgame',
       views: {
@@ -54,7 +61,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
     .state('app.gamedata', {
-      url: '/gamedata',
+      url: '/newgame/gamedata',
       views: {
         'menuContent': {
           templateUrl: 'templates/gamedata.html',
