@@ -2,14 +2,6 @@
 
 angular.module('starter.controllers', [])
 
-.factory('DatiPartita', function () {
-    return {
-        Giocatori:     [ {giocatore:'Pippo'}, {giocatore:'pluto' } ],
-        GetNomi: function () {
-            return this.Giocatori;
-        },
-    }
-})
 
 .controller('AppCtrl', function($scope) {
 })
@@ -45,7 +37,11 @@ angular.module('starter.controllers', [])
                 'data'  : $scope.data,
             });
             // buttare names nello storage
+<<<<<<< HEAD
             console.log($scope.names);
+=======
+            //console.log($scope.names);
+>>>>>>> myChanges
         }else{
             alert('Inserisci i nomi');
         }
