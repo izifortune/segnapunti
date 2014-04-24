@@ -10,7 +10,7 @@
     <div class="item item-text-wrap">
     <div class="row">
       <div class="col">
-        <h3 class="balanced">P1</h3>
+          <h3 class="balanced">P1</h3>
       </div>
       <div class="col col-50">
        <h1>{{p1Score}}</h1>
@@ -30,7 +30,7 @@
     <div class="item item-text-wrap">
       <div class="row">
         <div class="col">
-          <h3 class="assertive">P2</h3>
+            <h3 class="assertive">P2</h3>
         </div>
         <div class="col col-50">
          <h1>{{p2Score}}</h1>
@@ -47,16 +47,24 @@
       <button ng-click="plusp2Score()" class="button button-small icon-center ion-plus button-balanced">
       </button>
     </div>
+      
+    <div class="item">
+    <ion-list>
+    <ion-item href="#/app/newgame/gamedata">Metadati partita</ion-item>
+    </ion-list>
+    </div>
+
   </div>
   </ion-content>
   <ion-footer-bar align-title="left" class="bar-positive">
     <div class="buttons">
-      <button class="button" ng-click="addSetP1()">SET P1</button>
-      <button class="button" ng-click="addSetP2()">SET P2</button>
+        <button ng-click="finalScore()" class="button button-small icon-center ">Fine set</button>
+      <!--<button class="button" ng-click="addSetP1()">SET P1</button>-->
+      <!--<button class="button" ng-click="addSetP2()">SET P2</button>-->
     </div>
     <h1 class="title"></h1>
     <div class="buttons" ng-click="doSomething()">
-      <button class="button">FINE</button>
+      <button class="button">FINE PARTITA</button>
     </div>
   </ion-footer-bar>
 </ion-view>

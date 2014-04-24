@@ -2,17 +2,21 @@
 
 angular.module('starter.controllers', [])
 
+.factory('DatiPartita', function () {
+    return {
+        Giocatori:     [ {giocatore:'Pippo'}, {giocatore:'pluto' } ],
+        GetNomi: function () {
+            return this.Giocatori;
+        },
+    }
+})
+
 .controller('AppCtrl', function($scope) {
 })
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
   ];
 
   $scope.newGame = function() {
@@ -22,6 +26,21 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
+
+.controller('GameDataCtrl', function($scope, $stateParams) {
+    $scope.names = [];
+
+    $scope.addNames = function(){
+        $scope.names.push({
+            primo: $scope.giocatoreA,
+            secondo: $scope.giocatoreB,
+            terzo: 'pippo',
+        });
+        console.log($scope.names);
+    };
+})
+
+
 
 .controller('NewgameCtrl', function($scope, $stateParams) {
     $scope.p1Score = 0;
@@ -34,9 +53,6 @@ angular.module('starter.controllers', [])
     $scope.form2 = {};
 
     $scope.sets = [];
-
-    // $scope.tmp1Score = 0;
-    // $scope.tmp2Score = 0;
 
     $scope.plusp1Score = function(){
         if (Number($scope.form1.score)) {
@@ -65,6 +81,27 @@ angular.module('starter.controllers', [])
         }
     };
 
+    $scope.finalScore = function() {
+        if($scope.p1Score > $scope.p2Score) {
+            $scope.p1SetCount = $scope.p1SetCount +1;
+        }else if ($scope.p2Score > $scope.p1Score){
+            $scope.p2SetCount = $scope.p2SetCount +1;
+        }else{
+            return;
+        }
+
+        $scope.sets.push({
+            p1Score: $scope.p1Score,
+            p2Score: $scope.p2Score,
+            //win: true,
+        });
+
+        $scope.p1Score = 0;
+        $scope.form1.score = '';
+        $scope.p2Score = 0;
+        $scope.form2.score = '';
+    }
+
     $scope.addSetP1 = function() {
         $scope.p1SetCount = $scope.p1SetCount + 1;
         $scope.sets.push({
@@ -82,6 +119,7 @@ angular.module('starter.controllers', [])
             win: false,
         });
     };
+
 
     $scope.endGame = function() {
 
