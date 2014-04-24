@@ -28,10 +28,14 @@ angular.module('starter.controllers', [])
 })
 
 .controller('GameDataCtrl', function($scope, $stateParams) {
-    $scope.names = ['-','-'];
+    $scope.names = [];
 
     $scope.addNames = function(){
-        // aggiungi i nomi al vettore
+        $scope.names.push({
+            primo: $scope.giocatoreA,
+            secondo: $scope.giocatoreB,
+            terzo: 'pippo',
+        });
         console.log($scope.names);
     };
 })
@@ -115,6 +119,7 @@ angular.module('starter.controllers', [])
             win: false,
         });
     };
+
 
     $scope.endGame = function() {
 
