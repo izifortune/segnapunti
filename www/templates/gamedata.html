@@ -13,40 +13,34 @@
             <div class="col">
                 <h3 class="balanced">Giocatore 1</h3>
             </div>
-            <div class="col col-50">{{giocatoreA}} </div>
             <div class="col"> </div>
         </div>
     </div>
     <label class="item item-input-inset">
-        <!--<label class="item-input-wrapper">-->
-        <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatoreA" />
-        <!--</label>-->
+        <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore1.text" />
     </label>
     <div class="item item-text-wrap">
         <div class="row">
             <div class="col">
                 <h3 class="assertive">Giocatore 2</h3>
             </div>
-            <div class="col col-50">{{giocatoreB}} </div>
             <div class="col"> </div>
         </div>
     </div>
     <div class="item item-input-inset">
-        <!--<label class="item-input-wrapper">-->
-        <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatoreB" />
-        <!--</label>-->
+        <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore2.text" />
     </div>
 
     <div class="item">
-        Data <input type="datetime-local" name="gday">
+        Data incontro: <input type="date" ng-model="data">
     </div>
-    <div class="item">
-        <button ng-click="addNames()" class="button button-small icon-center">Salva</div>
-    </div>
-    </ion-content>
-    <ion-footer-bar align-title="left" class="bar-positive">
-    <div class="buttons">
-    </div>
-    <h1 class="title"></h1>
-    </ion-footer-bar>
-    </ion-view>
+</div>
+</ion-content>
+
+<ion-footer-bar align-title="left" class="bar-positive">
+<h1 class="title"></h1>
+<div class="buttons">
+    <button ng-click="addNames()" class="button button-small icon-center">Salva</div>
+</div>
+</ion-footer-bar>
+</ion-view>

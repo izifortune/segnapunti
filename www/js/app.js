@@ -25,7 +25,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       controller: 'AppCtrl'
     })
 
-
     .state('app.browse', {
       url: "/browse",
       views: {
@@ -34,6 +33,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+
     .state('app.playlists', {
       url: "/playlists",
       views: {
@@ -43,6 +43,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+
     .state('app.newgame', {
       url: '/newgame',
       views: {
