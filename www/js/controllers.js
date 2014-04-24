@@ -30,16 +30,27 @@ angular.module('starter.controllers', [])
 .controller('GameDataCtrl', function($scope, $stateParams) {
     $scope.names = [];
 
-    $scope.addNames = function(){
-        $scope.names.push({
-            primo: $scope.giocatoreA,
-            secondo: $scope.giocatoreB,
-            terzo: 'pippo',
-        });
-        console.log($scope.names);
+    // se nello storage non c'è nulla inizializziamo
+    // in caso contrario...
+    $scope.giocatore1 = {};
+    $scope.giocatore2 = {};
+    $scope.data = {}; // per la data credo occorra il date picker
+
+    $scope.addNames = function() {
+
+        if ( typeof $scope.giocatore1.text != 'undefined'  && typeof $scope.giocatore2.text != 'undefined' )  {
+            $scope.names.push({
+                'nome1' : $scope.giocatore1.text,
+                'nome2' : $scope.giocatore2.text,
+                'data'  : $scope.data,
+            });
+            // buttare names nello storage
+            //console.log($scope.names);
+        }else{
+            alert('Inserisci i nomi');
+        }
     };
 })
-
 
 
 .controller('NewgameCtrl', function($scope, $stateParams) {
