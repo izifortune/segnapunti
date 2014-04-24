@@ -2,14 +2,6 @@
 
 angular.module('starter.controllers', [])
 
-.factory('DatiPartita', function () {
-    return {
-        Giocatori:     [ {giocatore:'Pippo'}, {giocatore:'pluto' } ],
-        GetNomi: function () {
-            return this.Giocatori;
-        },
-    }
-})
 
 .controller('AppCtrl', function($scope) {
 })
