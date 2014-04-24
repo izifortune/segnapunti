@@ -24,8 +24,14 @@
       <label class="item-input-wrapper">
         <input type="number" placeholder="Inserisci il punteggio" ng-model="form1.score">
       </label>
-      <button ng-click="plusp1Score()" class="button button-small icon-center ion-plus button-balanced">
-      </button>
+
+      <div class="col">
+          <button ng-click="plusp1Score()" class="button button-small icon-center ion-plus button-balanced"></button>
+      </div>
+      <div class="col">
+          <select ng-model="p1ScoreOrig" ng-options="tipo.label for tipo in tipopunteggio"></select>
+      </div>
+
     </label>
     <div class="item item-text-wrap">
       <div class="row">
@@ -44,16 +50,22 @@
       <label class="item-input-wrapper">
         <input type="number" placeholder="Inserisci il punteggio" ng-model="form2.score">
       </label>
-      <button ng-click="plusp2Score()" class="button button-small icon-center ion-plus button-balanced">
-      </button>
+      <div class="col">
+          <button ng-click="plusp2Score()" class="button button-small icon-center ion-plus button-balanced"></button>
+      </div>
+      <div class="col">
+          <select ng-model="p2ScoreOrig" ng-options="tipo.label for tipo in tipopunteggio"></select>
+      </div>
   </div>
-  <div class="card">
+  <div>
+      <div class="card">
           <label class="item item-divider">
               Giocatore 1 : <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore1.text" />
           </label>
           <label class="item item-divider">
               Giocatore 2 : <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore2.text" />
           </label>
+      </div>
   </div>
     <!--<div class="item">-->
     <!--<ion-list>-->

@@ -54,6 +54,18 @@ angular.module('starter.controllers', ['ngStorage'])
 
 
 .controller('NewgameCtrl', function($scope, $stateParams) {
+
+    $scope.tipopunteggio = [
+        {"id": 1,"group": "1", "label":'Accosto'},
+        {"id": 2,"group": "2", "label":'Acchitto'},
+        {"id": 3,"group": "3", "label":'Bocciata'},
+        {"id": 4,"group": "4", "label":'Calcio'},
+    ];
+    $scope.p1ScoreOrig = $scope.tipopunteggio[0];
+    $scope.p2ScoreOrig = $scope.tipopunteggio[0];
+    $scope.p1ScoreByType = [];
+    $scope.p2ScoreByType = [];
+
     $scope.p1Score = 0;
     $scope.p2Score = 0;
 
@@ -65,9 +77,13 @@ angular.module('starter.controllers', ['ngStorage'])
 
     $scope.sets = [];
 
-    $scope.plusp1Score = function(){
+    $scope.plusp1Score = function() {
         if (Number($scope.form1.score)) {
             $scope.p1Score = $scope.p1Score + Number($scope.form1.score);
+            $scope.p1ScoreByType.push({
+                t : this.p1ScoreOrig.label,
+                p : $scope.form1.score,
+            });
             if ($scope.p1Score < 0) {
                 $scope.p1Score = 0;
             }
@@ -76,12 +92,17 @@ angular.module('starter.controllers', ['ngStorage'])
         else {
             $scope.form1.score = '';
         }
+        console.log($scope.p1ScoreByType);
     };
-
 
     $scope.plusp2Score = function(){
         if (Number($scope.form2.score)) {
             $scope.p2Score = $scope.p2Score + Number($scope.form2.score);
+            $scope.p2ScoreByType.push({
+                t : this.p2ScoreOrig.label,
+                p : $scope.form2.score,
+            });
+
             if ($scope.p2Score < 0) {
                 $scope.p2Score = 0;
             }
@@ -92,6 +113,7 @@ angular.module('starter.controllers', ['ngStorage'])
         }
     };
 
+    // il pulsante di fine set
     $scope.finalScore = function() {
         if($scope.p1Score > $scope.p2Score) {
             $scope.p1SetCount = $scope.p1SetCount +1;
@@ -104,33 +126,14 @@ angular.module('starter.controllers', ['ngStorage'])
         $scope.sets.push({
             p1Score: $scope.p1Score,
             p2Score: $scope.p2Score,
-            //win: true,
         });
 
+        console.log($scope.sets);
         $scope.p1Score = 0;
         $scope.form1.score = '';
         $scope.p2Score = 0;
         $scope.form2.score = '';
     }
-
-    $scope.addSetP1 = function() {
-        $scope.p1SetCount = $scope.p1SetCount + 1;
-        $scope.sets.push({
-            p1Score: $scope.p1Score,
-            p2Score: $scope.p2Score,
-            win: true,
-        });
-    };
-
-    $scope.addSetP2 = function() {
-        $scope.p2SetCount = $scope.p2SetCount + 1;
-        $scope.sets.push({
-            p1Score: $scope.p1Score,
-            p2Score: $scope.p2Score,
-            win: false,
-        });
-    };
-
 
     $scope.endGame = function() {
 
