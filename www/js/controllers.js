@@ -7,7 +7,7 @@ angular.module('starter.controllers', ['ngStorage'])
     $localStorage,
     $sessionStorage
 ){
-
+    $scope.$storage = $localStorage;
 })
 
 .controller('AppCtrl', function($scope) {
@@ -38,6 +38,7 @@ angular.module('starter.controllers', ['ngStorage'])
 
     $scope.addNames = function() {
 
+            alert('Inserisci i nomi');
         if ( typeof $scope.giocatore1.text != 'undefined'  && typeof $scope.giocatore2.text != 'undefined' )  {
             $scope.names.push({
                 'nome1' : $scope.giocatore1.text,
@@ -45,15 +46,20 @@ angular.module('starter.controllers', ['ngStorage'])
                 'data'  : $scope.data,
             });
             // buttare names nello storage
-            //console.log($scope.names);
+             $localstorage.names = $scope.names;
         }else{
             alert('Inserisci i nomi');
         }
+        console.log($scope.names);
     };
 })
 
 
-.controller('NewgameCtrl', function($scope, $stateParams) {
+.controller('NewgameCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
+
+    $scope.names = [];
+    $scope.giocatore1 = {};
+    $scope.giocatore2 = {};
 
     $scope.tipopunteggio = [
         {"id": 1,"group": "1", "label":'Accosto'},
@@ -77,6 +83,23 @@ angular.module('starter.controllers', ['ngStorage'])
 
     $scope.sets = [];
 
+    //
+    $scope.addNames = function() {
+        if ( typeof $scope.giocatore1.text != 'undefined'  && typeof $scope.giocatore2.text != 'undefined' )  {
+            $scope.names.push({
+                'nome1' : $scope.giocatore1.text,
+                'nome2' : $scope.giocatore2.text,
+                'data'  : $scope.data,
+            });
+            // buttare names nello storage
+             $localStorage.names = $scope.names;
+        }else{
+            alert('Inserisci i nomi');
+        }
+        console.log($scope.names);
+    };
+
+    //
     $scope.plusp1Score = function() {
         if (Number($scope.form1.score)) {
             $scope.p1Score = $scope.p1Score + Number($scope.form1.score);
@@ -84,6 +107,9 @@ angular.module('starter.controllers', ['ngStorage'])
                 t : this.p1ScoreOrig.label,
                 p : $scope.form1.score,
             });
+
+            $localStorage.p2ScoreByType = $scope.p2ScoreByType;
+
             if ($scope.p1Score < 0) {
                 $scope.p1Score = 0;
             }
@@ -92,9 +118,9 @@ angular.module('starter.controllers', ['ngStorage'])
         else {
             $scope.form1.score = '';
         }
-        console.log($scope.p1ScoreByType);
     };
 
+    //
     $scope.plusp2Score = function(){
         if (Number($scope.form2.score)) {
             $scope.p2Score = $scope.p2Score + Number($scope.form2.score);
@@ -102,6 +128,8 @@ angular.module('starter.controllers', ['ngStorage'])
                 t : this.p2ScoreOrig.label,
                 p : $scope.form2.score,
             });
+
+            $localStorage.p2ScoreByType = $scope.p2ScoreByType;
 
             if ($scope.p2Score < 0) {
                 $scope.p2Score = 0;
@@ -133,10 +161,13 @@ angular.module('starter.controllers', ['ngStorage'])
         $scope.form1.score = '';
         $scope.p2Score = 0;
         $scope.form2.score = '';
+
+        $localStorage.sets = $scope.sets;
     }
 
+    //
     $scope.endGame = function() {
-
+        console.log($localStorage);
     };
 
 });

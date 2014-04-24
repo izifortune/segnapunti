@@ -65,6 +65,9 @@
           <label class="item item-divider">
               Giocatore 2 : <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore2.text" />
           </label>
+          <div class="buttons">
+              <button ng-click="addNames()" class="button button-small icon-center ">Salva</button>
+          </div>
       </div>
   </div>
     <!--<div class="item">-->
@@ -80,7 +83,7 @@
         <button ng-click="finalScore()" class="button button-small icon-center ">Fine set</button>
     </div>
     <h1 class="title"></h1>
-    <div class="buttons" ng-click="doSomething()">
+    <div class="buttons" ng-click="endGame()">
       <button class="button">FINE PARTITA</button>
     </div>
   </ion-footer-bar>
