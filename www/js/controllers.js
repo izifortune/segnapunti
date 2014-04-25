@@ -108,7 +108,7 @@ angular.module('starter.controllers', ['ngStorage'])
                 p : $scope.form1.score,
             });
 
-            $localStorage.p2ScoreByType = $scope.p2ScoreByType;
+            $localStorage.p1ScoreByType = $scope.p1ScoreByType;
 
             if ($scope.p1Score < 0) {
                 $scope.p1Score = 0;
