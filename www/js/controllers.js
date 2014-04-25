@@ -103,12 +103,13 @@ angular.module('starter.controllers', ['ngStorage'])
     $scope.plusp1Score = function() {
         if (Number($scope.form1.score)) {
             $scope.p1Score = $scope.p1Score + Number($scope.form1.score);
+
             $scope.p1ScoreByType.push({
-                t : this.p1ScoreOrig.label,
-                p : $scope.form1.score,
+                type : this.p1ScoreOrig.label,
+                pts : $scope.form1.score,
             });
 
-            $localStorage.p2ScoreByType = $scope.p2ScoreByType;
+            $localStorage.p1ScoreByType = $scope.p1ScoreByType;
 
             if ($scope.p1Score < 0) {
                 $scope.p1Score = 0;
@@ -124,9 +125,10 @@ angular.module('starter.controllers', ['ngStorage'])
     $scope.plusp2Score = function(){
         if (Number($scope.form2.score)) {
             $scope.p2Score = $scope.p2Score + Number($scope.form2.score);
+
             $scope.p2ScoreByType.push({
-                t : this.p2ScoreOrig.label,
-                p : $scope.form2.score,
+                type : this.p2ScoreOrig.label,
+                pts : $scope.form2.score,
             });
 
             $localStorage.p2ScoreByType = $scope.p2ScoreByType;
