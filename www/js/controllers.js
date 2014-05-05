@@ -28,21 +28,31 @@ angular.module('starter.controllers', ['ngStorage'])
 
 // passo anche i parametri dello storage
 .controller('BrowseGamesCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
-    //$scope.names = [];
     $scope.$storage = $localStorage;
-    $scope.punteggi1 = $localStorage.p1ScoreByType;
-    $scope.punteggi2 = $localStorage.p2ScoreByType;
-    console.log($localStorage);
+    var aa = [];
+    var bb = [];
+    for(var p in $localStorage.partita.sets) {
+            aa.push({ p1: $localStorage.partita.sets[p]['p1'] });
+            bb.push({ p2: $localStorage.partita.sets[p]['p2'] });
+    }
+    $scope.punteggi1 = aa;
+    $scope.punteggi2 = bb;
 })
 
 
 .controller('NewgameCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
-    $localStorage.$reset();
+    //$localStorage.$reset();
+
+    $localStorage.partita = [];
+
+    $localStorage.partita.push({
+        giocatore1 : "",
+        giocatore2 : ""
+    });
+
+    $localStorage.partita.sets = [];
 
     console.log($localStorage);
-    $scope.names = [];
-    $scope.giocatore1 = {};
-    $scope.giocatore2 = {};
 
     $scope.tipopunteggio = [
         {"id": 1,"group": "1", "label":'Accosto'},
@@ -50,8 +60,12 @@ angular.module('starter.controllers', ['ngStorage'])
         {"id": 3,"group": "3", "label":'Bocciata'},
         {"id": 4,"group": "4", "label":'Calcio'},
     ];
+
+    $scope.giocatore1 = {};
+    $scope.giocatore2 = {};
     $scope.p1ScoreOrig = $scope.tipopunteggio[0];
     $scope.p2ScoreOrig = $scope.tipopunteggio[0];
+
     $scope.p1ScoreByType = [];
     $scope.p2ScoreByType = [];
 
@@ -67,20 +81,16 @@ angular.module('starter.controllers', ['ngStorage'])
     $scope.sets = [];
 
     // memorizza i metadati della partita, nomi giocatori
-    // data
     $scope.addNames = function() {
         if ( typeof $scope.giocatore1.text != 'undefined'  && typeof $scope.giocatore2.text != 'undefined' )  {
-            $scope.names.push({
-                'nome1' : $scope.giocatore1.text,
-                'nome2' : $scope.giocatore2.text,
-                'data'  : $scope.data,
-            });
             // buttare names nello storage
-             $localStorage.names = $scope.names;
+             $localStorage.partita[0]['giocatore1'] = $scope.giocatore1.text;
+             $localStorage.partita[0]['giocatore2'] = $scope.giocatore2.text;
         }else{
-            alert('Inserisci i nomi');
+             $localStorage.partita[0]['giocatore1'] = $scope.giocatore1.text;
+             $localStorage.partita[0]['giocatore2'] = $scope.giocatore2.text;
         }
-        //console.log($scope.names);
+        console.log($localStorage);
     };
 
     //
@@ -139,25 +149,26 @@ angular.module('starter.controllers', ['ngStorage'])
             return;
         }
 
-        $scope.sets.push({
-            p1Score: $scope.p1Score,
-            p2Score: $scope.p2Score,
+        console.log($localStorage);
+        $localStorage.partita.sets.push({
+            p1 : $scope.p1Score,
+            p2 : $scope.p2Score
         });
 
-        //console.log($scope.sets);
         $scope.p1Score = 0;
         $scope.form1.score = '';
         $scope.p2Score = 0;
         $scope.form2.score = '';
 
-        $localStorage.sets = $scope.sets;
-        $localStorage.p1 = p1ScoreByType;
-        $localStorage.p2 = p2ScoreByType;
     }
 
-    //
+    // FIne della partita verifichiamo cosa c'è nello storage
     $scope.endGame = function() {
         console.log($localStorage);
     };
+
+    $scope.resetGame = function() {
+        $localStorage.$reset();
+    }
 
 });

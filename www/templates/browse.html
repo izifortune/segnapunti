@@ -7,20 +7,20 @@
   <div>
       <div class="row">
           <div class="col">
-              <h4>{{$storage.names[0].nome1}}</h4>
-              <ul>
+              <h4>{{$storage.partita[0]['giocatore1']}}</h4>
+              <ol>
                   <li ng-repeat="p in punteggi1">
-                  {{p.type}} :: {{p.pts}}
+                  {{p.p1}} 
                   </li>
-              </ul>
+              </ol>
           </div>
           <div class="col">
-              <h4>{{$storage.names[0].nome2}}</h4>
-              <ul>
+              <h4>{{$storage.partita[0]['giocatore2']}}</h4>
+              <ol>
                   <li ng-repeat="p in punteggi2">
-                  {{p.type}} :: {{p.pts}}
+                  {{p.p2}}
                   </li>
-              </ul>
+              </ol>
           </div>
       </div>
 
