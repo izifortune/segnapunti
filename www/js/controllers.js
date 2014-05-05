@@ -27,36 +27,19 @@ angular.module('starter.controllers', ['ngStorage'])
 })
 
 // passo anche i parametri dello storage
-.controller('GameDataCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
-    $scope.names = [];
-
-    // se nello storage non c'è nulla inizializziamo
-    // in caso contrario...
-    $scope.giocatore1 = {};
-    $scope.giocatore2 = {};
-    $scope.data = {}; // per la data credo occorra il date picker
-
-    $scope.addNames = function() {
-
-            alert('Inserisci i nomi');
-        if ( typeof $scope.giocatore1.text != 'undefined'  && typeof $scope.giocatore2.text != 'undefined' )  {
-            $scope.names.push({
-                'nome1' : $scope.giocatore1.text,
-                'nome2' : $scope.giocatore2.text,
-                'data'  : $scope.data,
-            });
-            // buttare names nello storage
-             $localstorage.names = $scope.names;
-        }else{
-            alert('Inserisci i nomi');
-        }
-        console.log($scope.names);
-    };
+.controller('BrowseGamesCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
+    //$scope.names = [];
+    $scope.$storage = $localStorage;
+    $scope.punteggi1 = $localStorage.p1ScoreByType;
+    $scope.punteggi2 = $localStorage.p2ScoreByType;
+    console.log($localStorage);
 })
 
 
 .controller('NewgameCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
+    $localStorage.$reset();
 
+    console.log($localStorage);
     $scope.names = [];
     $scope.giocatore1 = {};
     $scope.giocatore2 = {};
@@ -83,7 +66,8 @@ angular.module('starter.controllers', ['ngStorage'])
 
     $scope.sets = [];
 
-    //
+    // memorizza i metadati della partita, nomi giocatori
+    // data
     $scope.addNames = function() {
         if ( typeof $scope.giocatore1.text != 'undefined'  && typeof $scope.giocatore2.text != 'undefined' )  {
             $scope.names.push({
@@ -96,7 +80,7 @@ angular.module('starter.controllers', ['ngStorage'])
         }else{
             alert('Inserisci i nomi');
         }
-        console.log($scope.names);
+        //console.log($scope.names);
     };
 
     //
@@ -143,7 +127,9 @@ angular.module('starter.controllers', ['ngStorage'])
         }
     };
 
-    // il pulsante di fine set
+    /**
+     *      Pulsante di fine set
+     */
     $scope.finalScore = function() {
         if($scope.p1Score > $scope.p2Score) {
             $scope.p1SetCount = $scope.p1SetCount +1;
@@ -158,13 +144,15 @@ angular.module('starter.controllers', ['ngStorage'])
             p2Score: $scope.p2Score,
         });
 
-        console.log($scope.sets);
+        //console.log($scope.sets);
         $scope.p1Score = 0;
         $scope.form1.score = '';
         $scope.p2Score = 0;
         $scope.form2.score = '';
 
         $localStorage.sets = $scope.sets;
+        $localStorage.p1 = p1ScoreByType;
+        $localStorage.p2 = p2ScoreByType;
     }
 
     //

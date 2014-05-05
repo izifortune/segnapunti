@@ -3,6 +3,27 @@
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <h1>Browse</h1>
+  <h1>Dati partita</h1>
+  <div>
+      <div class="row">
+          <div class="col">
+              <h4>{{$storage.names[0].nome1}}</h4>
+              <ul>
+                  <li ng-repeat="p in punteggi1">
+                  {{p.type}} :: {{p.pts}}
+                  </li>
+              </ul>
+          </div>
+          <div class="col">
+              <h4>{{$storage.names[0].nome2}}</h4>
+              <ul>
+                  <li ng-repeat="p in punteggi2">
+                  {{p.type}} :: {{p.pts}}
+                  </li>
+              </ul>
+          </div>
+      </div>
+
+  </div>
   </ion-content>
 </ion-view>

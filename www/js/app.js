@@ -30,7 +30,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/browse",
       views: {
         'menuContent' :{
-          templateUrl: "templates/browse.html"
+          templateUrl: "templates/browse.html",
+          controller : 'BrowseGamesCtrl'
         }
       }
     })
@@ -56,7 +57,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
     .state('app.gamedata', {
-      url: '/newgame/gamedata',
+      url: '/gamedata',
       views: {
         'menuContent': {
           templateUrl: 'templates/gamedata.html',
