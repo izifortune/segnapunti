@@ -41,18 +41,18 @@ angular.module('starter.controllers', ['ngStorage'])
 
 
 .controller('NewgameCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
-    //$localStorage.$reset();
 
-    $localStorage.partita = [];
+    // inizializzo una nuova partita solo se già non ne esiste una
 
-    $localStorage.partita.push({
-        giocatore1 : "",
-        giocatore2 : ""
-    });
+        $localStorage.partita = [];
 
-    $localStorage.partita.sets = [];
+        $localStorage.partita.push({
+            giocatore1 : "",
+            giocatore2 : ""
+        });
 
-    console.log($localStorage);
+        $localStorage.partita.sets = [];
+    //console.log($localStorage);
 
     $scope.tipopunteggio = [
         {"id": 1,"group": "1", "label":'Accosto'},
@@ -137,9 +137,7 @@ angular.module('starter.controllers', ['ngStorage'])
         }
     };
 
-    /**
-     *      Pulsante di fine set
-     */
+    // Pulsante di fine set
     $scope.finalScore = function() {
         if($scope.p1Score > $scope.p2Score) {
             $scope.p1SetCount = $scope.p1SetCount +1;
@@ -149,7 +147,7 @@ angular.module('starter.controllers', ['ngStorage'])
             return;
         }
 
-        console.log($localStorage);
+        console.log($localStorage.partita.sets);
         $localStorage.partita.sets.push({
             p1 : $scope.p1Score,
             p2 : $scope.p2Score
@@ -162,11 +160,12 @@ angular.module('starter.controllers', ['ngStorage'])
 
     }
 
-    // FIne della partita verifichiamo cosa c'è nello storage
+    // Fine della partita verifichiamo cosa c'è nello storage
     $scope.endGame = function() {
         console.log($localStorage);
     };
 
+    // distrugge il localstorage.*
     $scope.resetGame = function() {
         $localStorage.$reset();
     }

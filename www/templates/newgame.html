@@ -10,23 +10,22 @@
      <div class="item item-text-wrap">
          <div class="row">
              <div class="col">
-                 <h3 class="balanced">P1 {{giocatore1.text}} </h3>
+                 <h3>{{giocatore1.text}} </h3>
+                 <i class="ion-ios7-circle-filled palline rosse-icon"></i>
              </div>
-             <div class="col col-50">
+             <div class="col ">
                  <h1>{{p1Score}}</h1>
              </div>
-             <div class="col">
-                 <p>SET <span style="font-size: 20px;">{{p1SetCount}}</span></p>
+             <div class="col card">
+                 <div>SET: {{p1SetCount}}</div>
              </div>
          </div>
      </div>
      <label class="item item-input-inset">
          <div class="col">
-             <!--<label class="item-input">-->
                  <div class="card">
                      <input type="number" placeholder="Inserisci il punteggio" ng-model="form1.score">
                  </div>
-             <!--</label>-->
          </div>
 
          <div class="col">
@@ -40,24 +39,25 @@
      <div class="item item-text-wrap">
          <div class="row">
              <div class="col">
-                 <h3 class="assertive">P2 {{giocatore2.text}}</h3>
-             </div>
-             <div class="col col-50">
-                 <h1>{{p2Score}}</h1>
+                 <h2>{{giocatore2.text}}</h2>
+                 <i class="ion-ios7-circle-outline palline"></i>
              </div>
              <div class="col">
-                 <p>SET <span style="font-size: 20px;">{{p2SetCount}}</span></p>
+                 <h1>{{p2Score}}</h1>
+             </div>
+             <div class="col card">
+                 <div >SET: {{p2SetCount}}</div>
              </div>
          </div>
      </div>
+
+
      <div class="item item-input-inset">
-         <!--<label class="item-input">-->
              <div class="col">
                  <div class="card">
                      <input type="number" placeholder="Inserisci il punteggio" ng-model="form2.score">
                  </div>
              </div>
-         <!--</label>-->
          <div class="col">
              <button ng-click="plusp2Score()" class="button button-small icon-center ion-plus button-balanced"></button>
          </div>
@@ -66,21 +66,24 @@
          </div>
      </div>
      <div>
-         <div class="card">
-             <label class="item item-divider">
-                 Giocatore 1 : <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore1.text" />
+         <div class="list list-inset">
+             <label class="item item-input">
+                 <span class="input-label">Giocatore 1</span>
+                 <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore1.text" />
              </label>
-             <label class="item item-divider">
-                 Giocatore 2 : <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore2.text" />
+             <label class="item item-input">
+                 <span class="input-label">Giocatore 2</span>
+                 <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore2.text" />
              </label>
-             <div class="buttons">
-                 <button ng-click="addNames()" class="button button-small icon-center ">Salva</button>
+             <div>
+                 <button ng-click="addNames()" class="button button-small button-block">Salva</button>
              </div>
          </div>
      </div>
 
  </div>
-  </ion-content>
+ </ion-content>
+
   <ion-footer-bar align-title="left" class="bar-positive">
     <div class="buttons">
         <button ng-click="finalScore()" class="button button-small icon-center ">Fine set</button>
