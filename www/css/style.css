@@ -15,7 +15,6 @@
 .punti {
     font-size: 20px;
     padding: 6px;
-    border: 1px solid #000000;
 }
 
 .destra {
@@ -24,13 +23,9 @@
 }
 
 .punti-rossi {
-    /*color: red;*/
-    /*background-color:red;*/
 }
 
 .punti-bianchi {
-    /*background-color: white;*/
-    /*color: white;*/
 }
 
 .sets {
@@ -38,6 +33,4 @@
     font-weight: bold;
     color: blue;
     padding: 6px;
-    /*border: 1px solid blue;*/
-    /*text-align: right;*/
 }
