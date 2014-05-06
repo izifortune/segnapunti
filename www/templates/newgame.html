@@ -15,15 +15,17 @@
     <div class="item">
         <div class="row">
             <div class="col ">
-                <h1>{{p1Score}}</h1>
+                <b>Pt:</b> {{p1Score}}
             </div>
-            <div class="col card">
-                <span>SET: {{p1SetCount}}</span>
+            <div class="col">
+                <b>Set:</b> {{p1SetCount}}
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <input type="number" placeholder="Inserisci il punteggio" ng-model="form1.score">
+            <div class="col item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="number" placeholder="Inserisci il punteggio" ng-model="form1.score">
+                </label>
             </div>
 
             <div class="col">
@@ -47,15 +49,17 @@
     <div class="item">
         <div class="row">
             <div class="col">
-                <h1>{{p2Score}}</h1>
+                <b>Pt:</b> {{p2Score}}
             </div>
-            <div class="col card">
-                <span>SET: {{p2SetCount}}</span>
+            <div class="col">
+                <b>Set:</b> {{p2SetCount}}
             </div>
         </div>
         <div class="row">
-            <div class="col">
-                <input type="number" placeholder="Inserisci il punteggio" ng-model="form2.score">
+            <div class="col item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="number" placeholder="Inserisci il punteggio" ng-model="form2.score">
+                </label>
             </div>
             <div class="col">
                 <button ng-click="plusp2Score()" class="button button-small icon-center ion-plus button-balanced"></button>
