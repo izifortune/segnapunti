@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 
 .palline {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .rosse-icon {
@@ -9,5 +9,35 @@
 }
 
 .bianche-icon {
-    color : #dcdcdc;
+    color : #ffffff;
+}
+
+.punti {
+    font-size: 20px;
+    padding: 6px;
+    border: 1px solid #000000;
+}
+
+.destra {
+
+    text-align: right;
+}
+
+.punti-rossi {
+    /*color: red;*/
+    /*background-color:red;*/
+}
+
+.punti-bianchi {
+    /*background-color: white;*/
+    /*color: white;*/
+}
+
+.sets {
+    font-size: 20px;
+    font-weight: bold;
+    color: blue;
+    padding: 6px;
+    /*border: 1px solid blue;*/
+    /*text-align: right;*/
 }
