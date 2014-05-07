@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers', ['ngStorage'])
+angular.module('starter.controllers', ['ngStorage', 'googlechart'])
 
 .controller('StorageCtrl', function(
     $scope,
@@ -37,6 +37,83 @@ angular.module('starter.controllers', ['ngStorage'])
     }
     $scope.punteggi1 = aa;
     $scope.punteggi2 = bb;
+})
+
+.controller('StatsCtrl', function($scope, $stateParams, $localStorage, $sessionStorage){
+    var a = _.groupBy($localStorage.p1ScoreByType, 'type');
+    var Acchitto = 0;
+    for(var t in a.Acchitto) {
+        Acchitto = Acchitto + a.Acchitto[t].pts;
+    }
+    var Bocciata = 0;
+    for(var t in a.Bocciata) {
+        Bocciata = Bocciata + a.Bocciata[t].pts;
+    }
+    var Accosto = 0;
+    for(var t in a.Accosto) {
+        Accosto = Accosto + a.Accosto[t].pts;
+    }
+    var Calcio = 0;
+    for(var t in a.Calcio) {
+        Calcio = Accosto + a.Accosto[t].pts;
+    }
+
+    var chart1 = {};
+    chart1.type = "PieChart";
+    chart1.data = [
+        [ 'Tipo', 'punti' ],
+        [ 'Acchitto', Acchitto ],
+        [ 'Bocciata', Bocciata ],
+        [ 'Accosto', Accosto ]
+    ];
+    chart1.formatters = {
+      number : [{
+        columnNum: 1,
+        pattern: "$ #,##0.00"
+      }]
+    };
+
+    $scope.chart1 = chart1;
+
+
+    var b = _.groupBy($localStorage.p2ScoreByType, 'type');
+    var Acchitto = 0;
+    for(var t in b.Acchitto) {
+        Acchitto = Acchitto + b.Acchitto[t].pts;
+        //console.log(b.Acchitto[t].pts);
+    }
+    var Bocciata = 0;
+    for(var t in b.Bocciata) {
+        Bocciata = Bocciata + b.Bocciata[t].pts;
+    }
+    var Accosto = 0;
+    for(var t in b.Accosto) {
+        Accosto = Accosto + b.Accosto[t].pts;
+    }
+    var Calcio = 0;
+    for(var t in b.Calcio) {
+        Calcio = Accosto + b.Accosto[t].pts;
+    }
+
+    var chart2 = {};
+    chart2.type = "PieChart";
+    chart2.data = [
+        [ 'Tipo', 'punti' ],
+        [ 'Acchitto', Acchitto ],
+        [ 'Bocciata', Bocciata ],
+        [ 'Accosto', Accosto ]
+    ];
+    chart2.formatters = {
+      number : [{
+        columnNum: 1,
+        pattern: "$ #,##0.00"
+      }]
+    };
+    $scope.giocatore1 = $localStorage.partita[0]['giocatore1'];
+    $scope.giocatore2 = $localStorage.partita[0]['giocatore2'];
+    $scope.chart2 = chart2;
+
+
 })
 
 
@@ -107,7 +184,7 @@ angular.module('starter.controllers', ['ngStorage'])
                 pts : $scope.form1.score,
             });
 
-            //$localStorage.p1ScoreByType = $scope.p1ScoreByType;
+            $localStorage.p1ScoreByType = $scope.p1ScoreByType;
             $localStorage.partita[0]['score1'] = $scope.p1Score;
 
             if ($scope.p1Score < 0) {
@@ -130,7 +207,7 @@ angular.module('starter.controllers', ['ngStorage'])
                 pts : $scope.form2.score,
             });
 
-            //$localStorage.p2ScoreByType = $scope.p2ScoreByType;
+            $localStorage.p2ScoreByType = $scope.p2ScoreByType;
             $localStorage.partita[0]['score2'] = $scope.p2Score;
 
             if ($scope.p2Score < 0) {
