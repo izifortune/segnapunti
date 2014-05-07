@@ -42,17 +42,20 @@ angular.module('starter.controllers', ['ngStorage'])
 
 .controller('NewgameCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
 
-    console.log($localStorage);
     // inizializzo una nuova partita solo se già non ne esiste una
 
+    if($stateParams.gameId === '0') {
+        $scope.$storage = $localStorage;
+    }else{
         $localStorage.partita = [];
 
         $localStorage.partita.push({
-            giocatore1 : "",
-            giocatore2 : ""
+            giocatore1 : "", sets1: 0, score1: 0,
+            giocatore2 : "", sets2: 0, score2: 0
         });
 
         $localStorage.partita.sets = [];
+    }
 
     $scope.tipopunteggio = [
         {"id": 1,"group": "1", "label":'Accosto'},
@@ -61,19 +64,20 @@ angular.module('starter.controllers', ['ngStorage'])
         {"id": 4,"group": "4", "label":'Calcio'},
     ];
 
-    $scope.giocatore1 = {};
-    $scope.giocatore2 = {};
+    $scope.giocatore1 = ({text: $localStorage.partita[0]['giocatore1'] });
+    $scope.giocatore2 = ({text: $localStorage.partita[0]['giocatore2'] });
+
     $scope.p1ScoreOrig = $scope.tipopunteggio[0];
     $scope.p2ScoreOrig = $scope.tipopunteggio[0];
 
     $scope.p1ScoreByType = [];
     $scope.p2ScoreByType = [];
 
-    $scope.p1Score = 0;
-    $scope.p2Score = 0;
+    $scope.p1Score = $localStorage.partita[0]['score1'];
+    $scope.p2Score = $localStorage.partita[0]['score2'];
 
-    $scope.p1SetCount = 0;
-    $scope.p2SetCount = 0;
+    $scope.p1SetCount = $localStorage.partita[0]['sets1'];
+    $scope.p2SetCount = $localStorage.partita[0]['sets2'];
 
     $scope.form1 = {};
     $scope.form2 = {};
@@ -103,7 +107,8 @@ angular.module('starter.controllers', ['ngStorage'])
                 pts : $scope.form1.score,
             });
 
-            $localStorage.p1ScoreByType = $scope.p1ScoreByType;
+            //$localStorage.p1ScoreByType = $scope.p1ScoreByType;
+            $localStorage.partita[0]['score1'] = $scope.p1Score;
 
             if ($scope.p1Score < 0) {
                 $scope.p1Score = 0;
@@ -125,7 +130,8 @@ angular.module('starter.controllers', ['ngStorage'])
                 pts : $scope.form2.score,
             });
 
-            $localStorage.p2ScoreByType = $scope.p2ScoreByType;
+            //$localStorage.p2ScoreByType = $scope.p2ScoreByType;
+            $localStorage.partita[0]['score2'] = $scope.p2Score;
 
             if ($scope.p2Score < 0) {
                 $scope.p2Score = 0;
@@ -147,11 +153,13 @@ angular.module('starter.controllers', ['ngStorage'])
             return;
         }
 
-        console.log($localStorage.partita.sets);
         $localStorage.partita.sets.push({
             p1 : $scope.p1Score,
             p2 : $scope.p2Score
         });
+
+        $localStorage.partita[0].sets1 = Number( $scope.p1SetCount );
+        $localStorage.partita[0].sets2 = Number( $scope.p2SetCount );
 
         $scope.p1Score = 0;
         $scope.form1.score = '';
