@@ -15,7 +15,7 @@
     <div class="item">
         <div class="row">
             <div class="col  col-75">
-                <span class="punti punti-rossi">{{p1Score}}</span>
+                Pt: <span class="punti punti-rossi">{{p1Score}}</span>
             </div>
             <div class="col">
                 Set: <span class="sets">{{p1SetCount}}</span>
@@ -37,10 +37,7 @@
         </div>
     </div>
 
-
-
     <!-- GIOCATORE 2 -->
-
     <div class="item item-divider">
         <i class="ion-ios7-circle-outline palline"></i>
         <b>{{giocatore2.text}}</b>
@@ -49,7 +46,7 @@
     <div class="item">
         <div class="row">
             <div class="col col-75">
-                <span class="punti punti-bianchi">{{p2Score}}</span>
+                Pt: <span class="punti punti-bianchi">{{p2Score}}</span>
             </div>
             <div class="col">
                 Set: <span class="sets">{{p2SetCount}}</span>
@@ -70,22 +67,24 @@
         </div>
     </div>
 
-    <div class="item item-divider">
-        Info partita
-        </div>
-        <div class="list list-inset">
-            <label class="item item-input">
-                <span class="input-label">Giocatore 1</span>
-                <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore1.text" />
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Giocatore 2</span>
-                <input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore2.text" />
-            </label>
-            <div>
-                <button ng-click="addNames()" class="button button-small button-block">Salva</button>
-            </div>
-        </div>
+    <!--Form dei nomi giocatori-->
+    <!--<div class="item item-divider">-->
+        <!--Info partita-->
+    <!--</div>-->
+    <!--<div class="list list-inset">-->
+        <!--<label class="item item-input">-->
+            <!--<span class="input-label">Giocatore 1</span>-->
+            <!--<input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore1.text" />-->
+        <!--</label>-->
+        <!--<label class="item item-input">-->
+            <!--<span class="input-label">Giocatore 2</span>-->
+            <!--<input type="text" placeholder="Nome giocatore/squadra" ng-model="giocatore2.text" />-->
+        <!--</label>-->
+        <!--<div>-->
+            <!--<button ng-click="addNames()" class="button button-small button-block">Salva</button>-->
+        <!--</div>-->
+    <!--</div>-->
+
 </div>
 </ion-content>
 

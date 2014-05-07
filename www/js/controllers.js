@@ -42,6 +42,7 @@ angular.module('starter.controllers', ['ngStorage'])
 
 .controller('NewgameCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
 
+    console.log($localStorage);
     // inizializzo una nuova partita solo se già non ne esiste una
 
         $localStorage.partita = [];
@@ -52,7 +53,6 @@ angular.module('starter.controllers', ['ngStorage'])
         });
 
         $localStorage.partita.sets = [];
-    //console.log($localStorage);
 
     $scope.tipopunteggio = [
         {"id": 1,"group": "1", "label":'Accosto'},
@@ -168,6 +168,7 @@ angular.module('starter.controllers', ['ngStorage'])
     // distrugge il localstorage.*
     $scope.resetGame = function() {
         $localStorage.$reset();
+        console.log($localStorage);
     }
 
 });
