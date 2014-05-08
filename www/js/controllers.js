@@ -13,13 +13,13 @@ angular.module('starter.controllers', ['ngStorage', 'googlechart'])
 .controller('AppCtrl', function($scope) {
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-  ];
+.controller('PlaylistsCtrl', function($scope, $localStorage, $sessionStorage) {
+    $scope.$storage = $localStorage;
+    $scope.partite = $localStorage.partita;
+    //console.log($localStorage.partita);
 
   $scope.newGame = function() {
-    console.log('new game');
+    //console.log('new game');
   };
 })
 
@@ -28,7 +28,8 @@ angular.module('starter.controllers', ['ngStorage', 'googlechart'])
 
 // passo anche i parametri dello storage
 .controller('BrowseGamesCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
-    $scope.$storage = $localStorage;
+    //$scope.$storage = $localStorage;
+    //console.log($localStorage);
     var aa = [];
     var bb = [];
     for(var p in $localStorage.partita.sets) {
@@ -64,12 +65,19 @@ angular.module('starter.controllers', ['ngStorage', 'googlechart'])
         [ 'Tipo', 'punti' ],
         [ 'Acchitto', Acchitto ],
         [ 'Bocciata', Bocciata ],
-        [ 'Accosto', Accosto ]
+        [ 'Accosto', Accosto ],
+        [ 'Calcio', Calcio ]
     ];
+    chart1.options = {
+        displayExactValues: true,
+        width: 400,
+        height: 200,
+        chartArea: {left:5,top:5,bottom:0,height:"100%"}
+    };
     chart1.formatters = {
       number : [{
         columnNum: 1,
-        pattern: "$ #,##0.00"
+        pattern: "#0"
       }]
     };
 
@@ -101,12 +109,19 @@ angular.module('starter.controllers', ['ngStorage', 'googlechart'])
         [ 'Tipo', 'punti' ],
         [ 'Acchitto', Acchitto ],
         [ 'Bocciata', Bocciata ],
-        [ 'Accosto', Accosto ]
+        [ 'Accosto', Accosto ],
+        [ 'Calcio', Calcio ]
     ];
+    chart2.options = {
+        displayExactValues: true,
+        width: 400,
+        height: 200,
+        chartArea: {left:5,top:5,bottom:0,height:"100%"}
+    };
     chart2.formatters = {
       number : [{
         columnNum: 1,
-        pattern: "$ #,##0.00"
+        pattern: "#0"
       }]
     };
     $scope.giocatore1 = $localStorage.partita[0]['giocatore1'];
@@ -120,7 +135,6 @@ angular.module('starter.controllers', ['ngStorage', 'googlechart'])
 .controller('NewgameCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
 
     // inizializzo una nuova partita solo se già non ne esiste una
-
     if($stateParams.gameId === '0') {
         $scope.$storage = $localStorage;
     }else{
@@ -171,7 +185,7 @@ angular.module('starter.controllers', ['ngStorage', 'googlechart'])
              $localStorage.partita[0]['giocatore1'] = $scope.giocatore1.text;
              $localStorage.partita[0]['giocatore2'] = $scope.giocatore2.text;
         }
-        console.log($localStorage);
+        //console.log($localStorage);
     };
 
     //
@@ -253,7 +267,7 @@ angular.module('starter.controllers', ['ngStorage', 'googlechart'])
     // distrugge il localstorage.*
     $scope.resetGame = function() {
         $localStorage.$reset();
-        console.log($localStorage);
+        //console.log($localStorage);
     }
 
 });

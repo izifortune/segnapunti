@@ -3,21 +3,21 @@
 <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
 </ion-nav-buttons>
 <ion-content class="has-header">
-<h1>Grafici</h1>
+<h4>Punteggio per tipo</h4>
 
 <div ng-app="starter" ng-controller="StatsCtrl">
     <div class="item item-divider">
         <h3>{{giocatore1}}</h3>
     </div>
     <div class="item">
-        <div google-chart chart="chart1" style="border:1px inset black;"></div>
+        <div google-chart chart="chart1"></div>
     </div>
     <div class="item item-divider">
         <h3>{{giocatore2}}</h3>
     </div>
 
     <div class="item">
-        <div google-chart chart="chart2" style="border:1px inset black;"></div>
+        <div google-chart chart="chart2"></div>
     </div>
 </div>
 
