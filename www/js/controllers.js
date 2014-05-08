@@ -41,6 +41,9 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
 })
 
 .controller('StatsCtrl2', function($scope, $stateParams, $localStorage) {
+    $scope.giocatore1 = $localStorage.partita[0]['giocatore1'];
+    $scope.giocatore2 = $localStorage.partita[0]['giocatore2'];
+
     var dati = _.groupBy($localStorage.p1ScoreByType, 'type');
     var dati1 = {acchitto: 0, accosto : 0, bocciata : 0, calcio : 0};
     for(var i in dati.Acchitto) { dati1.acchitto = dati1.acchitto + dati.Acchitto[i].pts; }
@@ -59,13 +62,13 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
         labels : ["Accosto", "Acchitto", "Bocciata", "Calcio"],
         datasets : [
             {
-            fillColor : "rgba(220,220,220,0.5)",
-            strokeColor : "rgba(220,220,220,1)",
+            fillColor : "rgba(220,0,0,0.7)",
+            strokeColor : "rgba(0,0,0,0.5)",
             data : [dati1.accosto, dati1.acchitto, dati1.bocciata, dati1.calcio]
         },
         {
-            fillColor : "rgba(151,187,205,0.5)",
-            strokeColor : "rgba(151,187,205,1)",
+            fillColor : "rgba(225,225,225,0.7)",
+            strokeColor : "rgba(0,0,0,0.5)",
             data : [dati2.accosto, dati2.acchitto, dati2.bocciata, dati2.calcio]
         }
         ]
@@ -113,12 +116,12 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
         //Boolean - If we show the scale above the chart data
         scaleOverlay : false,
         //Boolean - If we want to override with a hard coded scale
-        scaleOverride : true,
+        scaleOverride : false,
         //** Required if scaleOverride is true **
         //Number - The number of steps in a hard coded scale
-        scaleSteps : 10,
+        //scaleSteps : 10,
         //Number - The value jump in the hard coded scale
-        scaleStepWidth : 5,
+        //scaleStepWidth : 5,
         //Number - The scale starting value
         scaleStartValue : 0,
         //String - Colour of the scale line
@@ -163,12 +166,12 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
 
     $scope.polarOptions =  {
         //Boolean - If we want to override with a hard coded scale
-        scaleOverride : true,
+        scaleOverride : false,
         //** Required if scaleOverride is true **
         //Number - The number of steps in a hard coded scale
-        scaleSteps : 5,
+        scaleSteps : 6,
         //Number - The value jump in the hard coded scale
-        scaleStepWidth : 10,
+        //scaleStepWidth : 10,
         //Number - The centre starting value
         scaleStartValue : 0,
         //Boolean - Show line for each value in the scale

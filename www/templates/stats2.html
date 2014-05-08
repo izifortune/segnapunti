@@ -6,9 +6,19 @@
 <h4>Punteggio per tipo</h4>
 
 <div ng-controller="StatsCtrl2">
-    <canvas barchart options="barOptions" data="chart" width="400" height="300"></canvas><br />
-    <canvas polarchart options="polarOptions" data="chart1" width="200" height="200"></canvas>
-    <canvas polarchart options="polarOptions" data="chart2" width="200" height="200"></canvas>
+    <canvas barchart options="barOptions" data="chart" width="320" height="300"></canvas><br />
+    <div class="item">
+        <div class="col">
+            <b>{{giocatore1}}</b>
+        </div>
+        <canvas polarchart options="polarOptions" data="chart1" width="300" height="300" ></canvas>
+    </div>
+    <div class="item">
+        <div class="col">
+            <b>{{giocatore2}}</b>
+        </div>
+        <canvas polarchart options="polarOptions" data="chart2" width="300" height="300"></canvas>
+    </div>
 </div>
 
 </ion-content>
