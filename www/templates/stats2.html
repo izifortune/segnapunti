@@ -1,0 +1,15 @@
+<ion-view title="Browse">
+<ion-nav-buttons side="left">
+<button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+</ion-nav-buttons>
+<ion-content class="has-header">
+<h4>Punteggio per tipo</h4>
+
+<div ng-controller="StatsCtrl2">
+    <canvas barchart options="barOptions" data="chart" width="400" height="300"></canvas><br />
+    <canvas polarchart options="polarOptions" data="chart1" width="200" height="200"></canvas>
+    <canvas polarchart options="polarOptions" data="chart2" width="200" height="200"></canvas>
+</div>
+
+</ion-content>
+</ion-view>

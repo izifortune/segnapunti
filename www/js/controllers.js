@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers', ['ngStorage', 'googlechart'])
+angular.module('starter.controllers', ['ngStorage', 'angles'] )
 
 .controller('StorageCtrl', function(
     $scope,
@@ -40,95 +40,226 @@ angular.module('starter.controllers', ['ngStorage', 'googlechart'])
     $scope.punteggi2 = bb;
 })
 
-.controller('StatsCtrl', function($scope, $stateParams, $localStorage, $sessionStorage){
+.controller('StatsCtrl2', function($scope, $stateParams, $localStorage) {
+    var dati = _.groupBy($localStorage.p1ScoreByType, 'type');
+    var dati1 = {acchitto: 0, accosto : 0, bocciata : 0, calcio : 0};
+    for(var i in dati.Acchitto) { dati1.acchitto = dati1.acchitto + dati.Acchitto[i].pts; }
+    for(var i in dati.Accosto) { dati1.accosto = dati1.accosto + dati.Accosto[i].pts; }
+    for(var i in dati.Bocciata) { dati1.bocciata = dati1.bocciata + dati.Bocciata[i].pts; }
+    for(var i in dati.Calcio) { dati1.calcio = dati1.calcio +dati.Calcio[i].pts; }
+
+    var dati = _.groupBy($localStorage.p2ScoreByType, 'type');
+    var dati2 = {acchitto: 0, accosto : 0, bocciata : 0, calcio : 0};
+    for(var i in dati.Acchitto) { dati2.acchitto = dati2.acchitto + dati.Acchitto[i].pts; }
+    for(var i in dati.Accosto) { dati2.accosto = dati2.accosto + dati.Accosto[i].pts; }
+    for(var i in dati.Bocciata) { dati2.bocciata = dati2.bocciata + dati.Bocciata[i].pts; }
+    for(var i in dati.Calcio) { dati2.calcio = dati2.calcio +dati.Calcio[i].pts; }
+
+    $scope.chart = {
+        labels : ["Accosto", "Acchitto", "Bocciata", "Calcio"],
+        datasets : [
+            {
+            fillColor : "rgba(220,220,220,0.5)",
+            strokeColor : "rgba(220,220,220,1)",
+            data : [dati1.accosto, dati1.acchitto, dati1.bocciata, dati1.calcio]
+        },
+        {
+            fillColor : "rgba(151,187,205,0.5)",
+            strokeColor : "rgba(151,187,205,1)",
+            data : [dati2.accosto, dati2.acchitto, dati2.bocciata, dati2.calcio]
+        }
+        ]
+    }
+
+    $scope.chart1 = [
+        {
+        value : dati1.accosto,
+        color: "#D97041"
+    },
+    {
+        value : dati1.acchitto,
+        color: "#C7604C"
+    },
+    {
+        value : dati1.bocciata,
+        color: "#21323D"
+    },
+    {
+        value : dati1.calcio,
+        color: "#9D9B7F"
+    },
+    ]
+
+    $scope.chart2 = [
+        {
+        value : dati2.accosto,
+        color: "#D97041"
+    },
+    {
+        value : dati2.acchitto,
+        color: "#C7604C"
+    },
+    {
+        value : dati2.bocciata,
+        color: "#21323D"
+    },
+    {
+        value : dati2.calcio,
+        color: "#9D9B7F"
+    },
+    ]
+
+    $scope.barOptions = {
+        //Boolean - If we show the scale above the chart data
+        scaleOverlay : false,
+        //Boolean - If we want to override with a hard coded scale
+        scaleOverride : true,
+        //** Required if scaleOverride is true **
+        //Number - The number of steps in a hard coded scale
+        scaleSteps : 10,
+        //Number - The value jump in the hard coded scale
+        scaleStepWidth : 5,
+        //Number - The scale starting value
+        scaleStartValue : 0,
+        //String - Colour of the scale line
+        scaleLineColor : "rgba(0,0,0,.1)",
+        //Number - Pixel width of the scale line
+        scaleLineWidth : 1,
+        //Boolean - Whether to show labels on the scale
+        scaleShowLabels : true,
+        //Interpolated JS string - can access value
+        scaleLabel : "<%=value%>",
+        //String - Scale label font declaration for the scale label
+        scaleFontFamily : "'Arial'",
+        //Number - Scale label font size in pixels
+        scaleFontSize : 12,
+        //String - Scale label font weight style
+        scaleFontStyle : "normal",
+        //String - Scale label font colour
+        scaleFontColor : "#666",
+        ///Boolean - Whether grid lines are shown across the chart
+        scaleShowGridLines : true,
+        //String - Colour of the grid lines
+        scaleGridLineColor : "rgba(0,0,0,.05)",
+        //Number - Width of the grid lines
+        scaleGridLineWidth : 1,
+        //Boolean - If there is a stroke on each bar
+        barShowStroke : true,
+        //Number - Pixel width of the bar stroke
+        barStrokeWidth : 2,
+        //Number - Spacing between each of the X value sets
+        barValueSpacing : 5,
+        //Number - Spacing between data sets within X values
+        barDatasetSpacing : 1,
+        //Boolean - Whether to animate the chart
+        animation : false,
+        //Number - Number of animation steps
+        animationSteps : 60,
+        //String - Animation easing effect
+        animationEasing : "easeOutQuart",
+        //Function - Fires when the animation is complete
+        onAnimationComplete : null
+    }
+
+    $scope.polarOptions =  {
+        //Boolean - If we want to override with a hard coded scale
+        scaleOverride : true,
+        //** Required if scaleOverride is true **
+        //Number - The number of steps in a hard coded scale
+        scaleSteps : 5,
+        //Number - The value jump in the hard coded scale
+        scaleStepWidth : 10,
+        //Number - The centre starting value
+        scaleStartValue : 0,
+        //Boolean - Show line for each value in the scale
+        scaleShowLine : true,
+        //String - The colour of the scale line
+        scaleLineColor : "rgba(0,0,0,.1)",
+        //Number - The width of the line - in pixels
+        scaleLineWidth : 1,
+        //Boolean - whether we should show text labels
+        scaleShowLabels : true,
+        //Interpolated JS string - can access value
+        scaleLabel : "<%=value%>",
+        //String - Scale label font declaration for the scale label
+        scaleFontFamily : "'Arial'",
+        //Number - Scale label font size in pixels
+        scaleFontSize : 12,
+        //String - Scale label font weight style
+        scaleFontStyle : "normal",
+        //String - Scale label font colour
+        scaleFontColor : "#666",
+        //Boolean - Show a backdrop to the scale label
+        scaleShowLabelBackdrop : true,
+        //String - The colour of the label backdrop
+        scaleBackdropColor : "rgba(255,255,255,0.75)",
+        //Number - The backdrop padding above & below the label in pixels
+        scaleBackdropPaddingY : 2,
+        //Number - The backdrop padding to the side of the label in pixels
+        scaleBackdropPaddingX : 2,
+        //Boolean - Stroke a line around each segment in the chart
+        segmentShowStroke : true,
+        //String - The colour of the stroke on each segement.
+        segmentStrokeColor : "#fff",
+        //Number - The width of the stroke value in pixels
+        segmentStrokeWidth : 2,
+        //Boolean - Whether to animate the chart or not
+        animation : false,
+        //Number - Amount of animation steps
+        animationSteps : 100,
+        //String - Animation easing effect.
+        animationEasing : "easeOutBounce",
+        //Boolean - Whether to animate the rotation of the chart
+        animateRotate : true,
+        //Boolean - Whether to animate scaling the chart from the centre
+        animateScale : false,
+        //Function - This will fire when the animation of the chart is complete.
+        onAnimationComplete : null
+    };
+
+})
+
+
+
+// crea due grafici ma dipende da googlechart api e senza connessione non va
+.controller('StatsCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
+
+    var grafico = function(dati) {
+        var tmp = {acchitto: 0, accosto : 0, bocciata : 0, calcio : 0};
+        for(var i in dati.Acchitto) { tmp.acchitto = tmp.acchitto + dati.Acchitto[i].pts; }
+        for(var i in dati.Accosto) { tmp.accosto = tmp.accosto + dati.Accosto[i].pts; }
+        for(var i in dati.Bocciata) { tmp.bocciata = tmp.bocciata + dati.Bocciata[i].pts; }
+        for(var i in dati.Calcio) { tmp.calcio = tmp.calcio +dati.Calcio[i].pts; }
+
+        var chart = {};
+        chart.type = "PieChart";
+        chart.data = [
+            [ 'Tipo', 'punti' ],
+            [ 'Acchitto', tmp.acchitto ],
+            [ 'Bocciata', tmp.bocciata ],
+            [ 'Accosto', tmp.accosto ],
+            [ 'Calcio', tmp.calcio ]
+        ];
+        chart.options = {
+            displayExactValues: true,
+            width: 400,
+            height: 200,
+            chartArea: {left:5,top:5,bottom:0,height:"100%"}
+        };
+        chart.formatters = {
+            number : [{
+                columnNum: 1,
+                pattern: "#0"
+            }]
+        };
+        return chart;
+    }
+
     var a = _.groupBy($localStorage.p1ScoreByType, 'type');
-    var Acchitto = 0;
-    for(var t in a.Acchitto) {
-        Acchitto = Acchitto + a.Acchitto[t].pts;
-    }
-    var Bocciata = 0;
-    for(var t in a.Bocciata) {
-        Bocciata = Bocciata + a.Bocciata[t].pts;
-    }
-    var Accosto = 0;
-    for(var t in a.Accosto) {
-        Accosto = Accosto + a.Accosto[t].pts;
-    }
-    var Calcio = 0;
-    for(var t in a.Calcio) {
-        Calcio = Accosto + a.Accosto[t].pts;
-    }
-
-    var chart1 = {};
-    chart1.type = "PieChart";
-    chart1.data = [
-        [ 'Tipo', 'punti' ],
-        [ 'Acchitto', Acchitto ],
-        [ 'Bocciata', Bocciata ],
-        [ 'Accosto', Accosto ],
-        [ 'Calcio', Calcio ]
-    ];
-    chart1.options = {
-        displayExactValues: true,
-        width: 400,
-        height: 200,
-        chartArea: {left:5,top:5,bottom:0,height:"100%"}
-    };
-    chart1.formatters = {
-      number : [{
-        columnNum: 1,
-        pattern: "#0"
-      }]
-    };
-
-    $scope.chart1 = chart1;
-
+    $scope.chart1 = grafico(a);
 
     var b = _.groupBy($localStorage.p2ScoreByType, 'type');
-    var Acchitto = 0;
-    for(var t in b.Acchitto) {
-        Acchitto = Acchitto + b.Acchitto[t].pts;
-        //console.log(b.Acchitto[t].pts);
-    }
-    var Bocciata = 0;
-    for(var t in b.Bocciata) {
-        Bocciata = Bocciata + b.Bocciata[t].pts;
-    }
-    var Accosto = 0;
-    for(var t in b.Accosto) {
-        Accosto = Accosto + b.Accosto[t].pts;
-    }
-    var Calcio = 0;
-    for(var t in b.Calcio) {
-        Calcio = Accosto + b.Accosto[t].pts;
-    }
-
-    var chart2 = {};
-    chart2.type = "PieChart";
-    chart2.data = [
-        [ 'Tipo', 'punti' ],
-        [ 'Acchitto', Acchitto ],
-        [ 'Bocciata', Bocciata ],
-        [ 'Accosto', Accosto ],
-        [ 'Calcio', Calcio ]
-    ];
-    chart2.options = {
-        displayExactValues: true,
-        width: 400,
-        height: 200,
-        chartArea: {left:5,top:5,bottom:0,height:"100%"}
-    };
-    chart2.formatters = {
-      number : [{
-        columnNum: 1,
-        pattern: "#0"
-      }]
-    };
-    $scope.giocatore1 = $localStorage.partita[0]['giocatore1'];
-    $scope.giocatore2 = $localStorage.partita[0]['giocatore2'];
-    $scope.chart2 = chart2;
-
-
+    $scope.chart2 = grafico(b);
 })
 
 
