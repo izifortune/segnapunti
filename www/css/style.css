@@ -1,1 +1,55 @@
 /* Empty. Add your own CSS if you like */
+
+.palline {
+    font-size: 20px;
+}
+
+.rosse-icon {
+    color : red;
+}
+
+.bianche-icon {
+    color : #ffffff;
+}
+
+.punti {
+    font-size: 20px;
+    padding: 6px;
+}
+
+.destra {
+
+    text-align: right;
+}
+
+.punti-rossi {
+}
+
+.punti-bianchi {
+}
+
+.sets {
+    font-size: 20px;
+    font-weight: bold;
+    color: blue;
+    padding: 6px;
+}
+
+#chart {
+    height: 200px;
+    width: 400px;
+}
+
+
+
+.table th {
+    font-weight: bold;
+    padding: 4px;
+    text-align: right;
+}
+
+.table tbody td {
+    padding: 4px;
+    text-align: right;
+    border-bottom: 1px solid black;
+}

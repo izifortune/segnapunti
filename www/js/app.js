@@ -30,7 +30,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/browse",
       views: {
         'menuContent' :{
-          templateUrl: "templates/browse.html"
+          templateUrl: "templates/browse.html",
+          controller : 'BrowseGamesCtrl'
+        }
+      }
+    })
+
+    .state('app.chart', {
+      url: "/chart2",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/stats.html",
+          controller : 'StatsCtrl2'
         }
       }
     })
@@ -56,11 +67,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
     .state('app.gamedata', {
-      url: '/newgame/gamedata',
+      url: '/gamedata/:gameId',
       views: {
         'menuContent': {
-          templateUrl: 'templates/gamedata.html',
-          controller: 'GameDataCtrl'
+          templateUrl: 'templates/newgame.html',
+          controller: 'NewgameCtrl'
         }
       }
     })
