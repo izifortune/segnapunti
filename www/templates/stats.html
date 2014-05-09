@@ -5,19 +5,19 @@
 <ion-content class="has-header">
 <h4>Punteggio per tipo</h4>
 
-<div ng-controller="StatsCtrl">
-    <div class="item item-divider">
-        <h3>{{giocatore1}}</h3>
+<div ng-controller="StatsCtrl2">
+    <canvas barchart options="barOptions" data="chart" width="320" height="300"></canvas><br />
+    <div class="item">
+        <div class="col">
+            <b>{{giocatore1}}</b>
+        </div>
+        <canvas polarchart options="polarOptions" data="chart1" width="300" height="300" ></canvas>
     </div>
     <div class="item">
-        <div google-chart chart="chart1"></div>
-    </div>
-    <div class="item item-divider">
-        <h3>{{giocatore2}}</h3>
-    </div>
-
-    <div class="item">
-        <div google-chart chart="chart2"></div>
+        <div class="col">
+            <b>{{giocatore2}}</b>
+        </div>
+        <canvas polarchart options="polarOptions" data="chart2" width="300" height="300"></canvas>
     </div>
 </div>
 

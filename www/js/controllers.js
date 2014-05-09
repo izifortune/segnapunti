@@ -40,10 +40,11 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
     $scope.punteggi2 = bb;
 })
 
-.controller('StatsCtrl2', function($scope, $stateParams, $localStorage) {
+.controller('StatsCtrl2', function($scope, $stateParams, $localStorage, $sessionStorage) {
     $scope.giocatore1 = $localStorage.partita[0]['giocatore1'];
     $scope.giocatore2 = $localStorage.partita[0]['giocatore2'];
 
+    console.log($localStorage.p1ScoreByType);
     var dati = _.groupBy($localStorage.p1ScoreByType, 'type');
     var dati1 = {acchitto: 0, accosto : 0, bocciata : 0, calcio : 0};
     for(var i in dati.Acchitto) { dati1.acchitto = dati1.acchitto + dati.Acchitto[i].pts; }
@@ -222,54 +223,9 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
 
 })
 
-
-
-// crea due grafici ma dipende da googlechart api e senza connessione non va
-.controller('StatsCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
-
-    var grafico = function(dati) {
-        var tmp = {acchitto: 0, accosto : 0, bocciata : 0, calcio : 0};
-        for(var i in dati.Acchitto) { tmp.acchitto = tmp.acchitto + dati.Acchitto[i].pts; }
-        for(var i in dati.Accosto) { tmp.accosto = tmp.accosto + dati.Accosto[i].pts; }
-        for(var i in dati.Bocciata) { tmp.bocciata = tmp.bocciata + dati.Bocciata[i].pts; }
-        for(var i in dati.Calcio) { tmp.calcio = tmp.calcio +dati.Calcio[i].pts; }
-
-        var chart = {};
-        chart.type = "PieChart";
-        chart.data = [
-            [ 'Tipo', 'punti' ],
-            [ 'Acchitto', tmp.acchitto ],
-            [ 'Bocciata', tmp.bocciata ],
-            [ 'Accosto', tmp.accosto ],
-            [ 'Calcio', tmp.calcio ]
-        ];
-        chart.options = {
-            displayExactValues: true,
-            width: 400,
-            height: 200,
-            chartArea: {left:5,top:5,bottom:0,height:"100%"}
-        };
-        chart.formatters = {
-            number : [{
-                columnNum: 1,
-                pattern: "#0"
-            }]
-        };
-        return chart;
-    }
-
-    var a = _.groupBy($localStorage.p1ScoreByType, 'type');
-    $scope.chart1 = grafico(a);
-
-    var b = _.groupBy($localStorage.p2ScoreByType, 'type');
-    $scope.chart2 = grafico(b);
-})
-
-
 .controller('NewgameCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
-
     // inizializzo una nuova partita solo se già non ne esiste una
-    if($stateParams.gameId === '0') {
+    if( $stateParams.gameId == '0') {
         $scope.$storage = $localStorage;
     }else{
         $localStorage.partita = [];
@@ -280,6 +236,8 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
         });
 
         $localStorage.partita.sets = [];
+        $localStorage.p1ScoreByType = [];
+        $localStorage.p2ScoreByType = [];
     }
 
     $scope.tipopunteggio = [
@@ -289,14 +247,11 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
         {"id": 4,"group": "4", "label":'Calcio'},
     ];
 
-    $scope.giocatore1 = ({text: $localStorage.partita[0]['giocatore1'] });
-    $scope.giocatore2 = ({text: $localStorage.partita[0]['giocatore2'] });
+    $scope.giocatore1 = ($localStorage.partita[0]['giocatore1'] != '') ? ({text: $localStorage.partita[0]['giocatore1'] }) : ({text: ''});
+    $scope.giocatore2 = ($localStorage.partita[0]['giocatore2'] != '') ? ({text: $localStorage.partita[0]['giocatore2'] }) : ({text: ''});
 
     $scope.p1ScoreOrig = $scope.tipopunteggio[0];
     $scope.p2ScoreOrig = $scope.tipopunteggio[0];
-
-    $scope.p1ScoreByType = [];
-    $scope.p2ScoreByType = [];
 
     $scope.p1Score = $localStorage.partita[0]['score1'];
     $scope.p2Score = $localStorage.partita[0]['score2'];
@@ -311,15 +266,8 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
 
     // memorizza i metadati della partita, nomi giocatori
     $scope.addNames = function() {
-        if ( typeof $scope.giocatore1.text != 'undefined'  && typeof $scope.giocatore2.text != 'undefined' )  {
-            // buttare names nello storage
              $localStorage.partita[0]['giocatore1'] = $scope.giocatore1.text;
              $localStorage.partita[0]['giocatore2'] = $scope.giocatore2.text;
-        }else{
-             $localStorage.partita[0]['giocatore1'] = $scope.giocatore1.text;
-             $localStorage.partita[0]['giocatore2'] = $scope.giocatore2.text;
-        }
-        //console.log($localStorage);
     };
 
     //
@@ -327,21 +275,21 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
         if (Number($scope.form1.score)) {
             $scope.p1Score = $scope.p1Score + Number($scope.form1.score);
 
-            $scope.p1ScoreByType.push({
+            $localStorage.p1ScoreByType.push({
                 type : this.p1ScoreOrig.label,
                 pts : $scope.form1.score,
             });
 
-            $localStorage.p1ScoreByType = $scope.p1ScoreByType;
+            //$localStorage.p1ScoreByType = $scope.p1ScoreByType;
             $localStorage.partita[0]['score1'] = $scope.p1Score;
 
             if ($scope.p1Score < 0) {
                 $scope.p1Score = 0;
             }
-            $scope.form1.score = '';
+            $scope.form1.score = 0;
         }
         else {
-            $scope.form1.score = '';
+            $scope.form1.score = 0;
         }
     };
 
@@ -350,26 +298,27 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
         if (Number($scope.form2.score)) {
             $scope.p2Score = $scope.p2Score + Number($scope.form2.score);
 
-            $scope.p2ScoreByType.push({
+            $localStorage.p2ScoreByType.push({
                 type : this.p2ScoreOrig.label,
                 pts : $scope.form2.score,
             });
 
-            $localStorage.p2ScoreByType = $scope.p2ScoreByType;
+            //$localStorage.p2ScoreByType = $scope.p2ScoreByType;
             $localStorage.partita[0]['score2'] = $scope.p2Score;
 
             if ($scope.p2Score < 0) {
                 $scope.p2Score = 0;
             }
-            $scope.form2.score = '';
+            $scope.form2.score = 0;
         }
         else {
-            $scope.form2.score = '';
+            $scope.form2.score = 0;
         }
     };
 
     // Pulsante di fine set
     $scope.finalScore = function() {
+        // vediamo chi è il vincitore
         if($scope.p1Score > $scope.p2Score) {
             $scope.p1SetCount = $scope.p1SetCount +1;
         }else if ($scope.p2Score > $scope.p1Score){
@@ -378,6 +327,7 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
             return;
         }
 
+        console.log($localStorage);
         $localStorage.partita.sets.push({
             p1 : $scope.p1Score,
             p2 : $scope.p2Score
@@ -385,17 +335,21 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
 
         $localStorage.partita[0].sets1 = Number( $scope.p1SetCount );
         $localStorage.partita[0].sets2 = Number( $scope.p2SetCount );
+        $localStorage.partita[0]['score1'] = 0;
+        $localStorage.partita[0]['score2'] = 0;
 
         $scope.p1Score = 0;
-        $scope.form1.score = '';
+        $scope.form1.score = 0;
         $scope.p2Score = 0;
-        $scope.form2.score = '';
+        $scope.form2.score = 0;
 
     }
 
     // Fine della partita verifichiamo cosa c'è nello storage
     $scope.endGame = function() {
         console.log($localStorage);
+        // qui verosimilmente archiviamo la partita anziché resettare
+        $localStorage.$reset();
     };
 
     // distrugge il localstorage.*
