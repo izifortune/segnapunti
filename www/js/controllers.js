@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers', ['ngStorage', 'angles'] )
+angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
 
 .controller('StorageCtrl', function(
     $scope,
@@ -27,24 +27,43 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
 })
 
 // passo anche i parametri dello storage
-.controller('BrowseGamesCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
-    //$scope.$storage = $localStorage;
-    //console.log($localStorage);
+.controller('BrowseGamesCtrl', function($scope, $stateParams, $localStorage, $sessionStorage, ngTableParams) {
     var aa = [];
     var bb = [];
-    for(var p in $localStorage.partita.sets) {
-            aa.push({ p1: $localStorage.partita.sets[p]['p1'] });
-            bb.push({ p2: $localStorage.partita.sets[p]['p2'] });
+    var sets = [];
+
+    if($localStorage.sets.length > 0) {
+        for(var p in $localStorage.sets) {
+            aa.push({ p1: $localStorage.sets[p]['p1'] });
+            bb.push({ p2: $localStorage.sets[p]['p2'] });
+            sets.push(
+                      {
+                    set:  ( Number(p)+1 ),
+                    p1 : $localStorage.sets[p]['p1'],
+                    p2 : $localStorage.sets[p]['p2']
+            }
+            );
+        }
     }
-    $scope.punteggi1 = aa;
-    $scope.punteggi2 = bb;
+    $scope.giocatore1 = $localStorage.partita[0]['giocatore1'];
+    $scope.giocatore2 = $localStorage.partita[0]['giocatore2'];
+    $scope.tableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: sets.length
+    }, {
+        total: sets.length, // length of data
+        getData: function($defer, params) {
+            $defer.resolve(sets.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        },
+        counts : []
+    });
+
 })
 
 .controller('StatsCtrl2', function($scope, $stateParams, $localStorage, $sessionStorage) {
     $scope.giocatore1 = $localStorage.partita[0]['giocatore1'];
     $scope.giocatore2 = $localStorage.partita[0]['giocatore2'];
 
-    console.log($localStorage.p1ScoreByType);
     var dati = _.groupBy($localStorage.p1ScoreByType, 'type');
     var dati1 = {acchitto: 0, accosto : 0, bocciata : 0, calcio : 0};
     for(var i in dati.Acchitto) { dati1.acchitto = dati1.acchitto + dati.Acchitto[i].pts; }
@@ -63,54 +82,27 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
         labels : ["Accosto", "Acchitto", "Bocciata", "Calcio"],
         datasets : [
             {
-            fillColor : "rgba(220,0,0,0.7)",
-            strokeColor : "rgba(0,0,0,0.5)",
+            fillColor : "rgba(220,0,0,0.7)", strokeColor : "rgba(0,0,0,0.5)",
             data : [dati1.accosto, dati1.acchitto, dati1.bocciata, dati1.calcio]
         },
-        {
-            fillColor : "rgba(225,225,225,0.7)",
-            strokeColor : "rgba(0,0,0,0.5)",
+        { fillColor : "rgba(225,225,225,0.7)", strokeColor : "rgba(0,0,0,0.5)",
             data : [dati2.accosto, dati2.acchitto, dati2.bocciata, dati2.calcio]
         }
         ]
     }
 
     $scope.chart1 = [
-        {
-        value : dati1.accosto,
-        color: "#D97041"
-    },
-    {
-        value : dati1.acchitto,
-        color: "#C7604C"
-    },
-    {
-        value : dati1.bocciata,
-        color: "#21323D"
-    },
-    {
-        value : dati1.calcio,
-        color: "#9D9B7F"
-    },
+        { value : dati1.accosto, color: "#D97041" },
+        { value : dati1.acchitto, color: "#C7604C" },
+        { value : dati1.bocciata, color: "#21323D" },
+        { value : dati1.calcio, color: "#9D9B7F" },
     ]
 
     $scope.chart2 = [
-        {
-        value : dati2.accosto,
-        color: "#D97041"
-    },
-    {
-        value : dati2.acchitto,
-        color: "#C7604C"
-    },
-    {
-        value : dati2.bocciata,
-        color: "#21323D"
-    },
-    {
-        value : dati2.calcio,
-        color: "#9D9B7F"
-    },
+        { value : dati2.accosto, color: "#D97041" },
+        { value : dati2.acchitto, color: "#C7604C" },
+        { value : dati2.bocciata, color: "#21323D" },
+        { value : dati2.calcio, color: "#9D9B7F" },
     ]
 
     $scope.barOptions = {
@@ -225,7 +217,7 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
 
 .controller('NewgameCtrl', function($scope, $stateParams, $localStorage, $sessionStorage) {
     // inizializzo una nuova partita solo se già non ne esiste una
-    if( $stateParams.gameId == '0') {
+    if( $stateParams.gameId == '0' && $localStorage.partita !== undefined) {
         $scope.$storage = $localStorage;
     }else{
         $localStorage.partita = [];
@@ -235,7 +227,7 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
             giocatore2 : "", sets2: 0, score2: 0
         });
 
-        $localStorage.partita.sets = [];
+        $localStorage.sets = [];
         $localStorage.p1ScoreByType = [];
         $localStorage.p2ScoreByType = [];
     }
@@ -327,8 +319,8 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
             return;
         }
 
-        console.log($localStorage);
-        $localStorage.partita.sets.push({
+        //console.log($localStorage);
+        $localStorage.sets.push({
             p1 : $scope.p1Score,
             p2 : $scope.p2Score
         });
@@ -347,7 +339,7 @@ angular.module('starter.controllers', ['ngStorage', 'angles'] )
 
     // Fine della partita verifichiamo cosa c'è nello storage
     $scope.endGame = function() {
-        console.log($localStorage);
+        //console.log($localStorage);
         // qui verosimilmente archiviamo la partita anziché resettare
         $localStorage.$reset();
     };

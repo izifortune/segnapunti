@@ -1,23 +1,26 @@
 <ion-view title="Browse">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
-  <h4>Dati partita</h4>
-      <div class="row">
-          <div class="col">
-              <h4 class="item-list-divider">{{$storage.partita[0]['giocatore1']}}</h4>
-              <ol>
-                  <li ng-repeat="p in punteggi1">{{p.p1}}</li>
-              </ol>
-          </div>
-          <div class="col">
-              <h4>{{$storage.partita[0]['giocatore2']}}</h4>
-              <ol>
-                  <li ng-repeat="p in punteggi2">{{p.p2}}</li>
-              </ol>
-          </div>
-      </div>
+<ion-nav-buttons side="left">
+<button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+</ion-nav-buttons>
+<ion-content class="has-header">
+<h4>Dati partita</h4>
 
-  </ion-content>
+
+<div class="col">
+    <table ng-table="tableParams" class="table">
+        <tr>
+            <th>Set</th>
+            <th width="60px">{{giocatore1}}</th>
+            <th width="60px">{{giocatore2}}</th>
+        </tr>
+        <tr ng-repeat="s in $data">
+            <td data-title="'Set'">{{s.set}}</td>
+            <td data-title="'Punti'" align="right">{{s.p1}}</td>
+            <td data-title="'Punti'" align="right">{{s.p2}}</td>
+        </tr>
+    </table>
+</div>
+
+
+</ion-content>
 </ion-view>

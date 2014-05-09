@@ -39,3 +39,17 @@
     height: 200px;
     width: 400px;
 }
+
+
+
+.table th {
+    font-weight: bold;
+    padding: 4px;
+    text-align: right;
+}
+
+.table tbody td {
+    padding: 4px;
+    text-align: right;
+    border-bottom: 1px solid black;
+}
