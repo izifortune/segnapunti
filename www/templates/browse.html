@@ -3,22 +3,49 @@
 <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
 </ion-nav-buttons>
 <ion-content class="has-header">
-<h4>Dati partita</h4>
 
+<div class="list">
+    <div class="item item-divider">
+        Dati partita
+    </div>
+    <div class="item" >
 
-<div class="col">
-    <table ng-table="tableParams" class="table">
-        <tr>
-            <th>Set</th>
-            <th width="60px">{{giocatore1}}</th>
-            <th width="60px">{{giocatore2}}</th>
-        </tr>
-        <tr ng-repeat="s in $data">
-            <td data-title="'Set'">{{s.set}}</td>
-            <td data-title="'Punti'" align="right">{{s.p1}}</td>
-            <td data-title="'Punti'" align="right">{{s.p2}}</td>
-        </tr>
-    </table>
+        <table ng-table="tableParams" class="table"  export-csv="csv">
+            <tr>
+                <th width="20px">Set</th>
+                <th width="180px">{{giocatore1}}</th>
+                <th width="180px">{{giocatore2}}</th>
+            </tr>
+            <tr ng-repeat="s in $data">
+                <td class="sets" data-title="'Set'">{{s.set}}</td>
+                <td data-title="'Punti'" align="right">{{s.p1}}</td>
+                <td data-title="'Punti'" align="right">{{s.p2}}</td>
+            </tr>
+        </table>
+        <div class="col">
+            <!--<a class="btn btn-primary" ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv">Exporta CSV</a>-->
+        </div>
+    </div>
+
+    <div class="item">
+        <table ng-table="tableParams1" class="table" export-csv="csv1">
+            <tr>
+                <th width="20px"></th>
+                <th width="180px">{{giocatore1}}</th>
+                <th width="180px">{{giocatore2}}</th>
+            </tr>
+            <tr ng-repeat="t in $data">
+                <td>{{t.tipo}}</td>
+                <td data-title="'Punti'">{{t.p1}}</td>
+                <td data-title="'Punti'">{{t.p2}}</td>
+            </tr>    
+        </table>    
+        <div class="col">
+            <!--<a class="btn btn-primary" ng-mousedown="csv1.generate()" ng-href="{{ csv1.link() }}" download="tipi_punto.csv">Exporta CSV</a>-->
+        </div>
+    </div>
+    
+    
 </div>
 
 
