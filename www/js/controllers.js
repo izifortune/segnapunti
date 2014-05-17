@@ -1,7 +1,6 @@
 'use strict';
 
-
-angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
+angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'])
 
 .controller('StorageCtrl', function(
     $scope,
@@ -32,6 +31,8 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
     var aa = [];
     var bb = [];
     var sets = [];
+    var tot1 = 0;
+    var tot2 = 0;
 
     //console.log($localStorage.sets)
     if($localStorage.sets.length > 0) {
@@ -45,6 +46,8 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
                 p2 : $localStorage.sets[p]['p2']
             }
             );
+            tot1 = tot1 + Number( $localStorage.sets[p]['p1'] );
+            tot2 = tot2 + Number( $localStorage.sets[p]['p2'] );
         }
         $scope.giocatore1 = $localStorage.partita[0]['giocatore1'];
         $scope.giocatore2 = $localStorage.partita[0]['giocatore2'];
@@ -62,14 +65,13 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
 
         var tipi =  [];
         var dati = _.groupBy($localStorage.p1ScoreByType, 'type');
-        //console.log(dati)
         var dati1 = {acchitto: 0, accosto : 0, bocciata : 0, calcio : 0, bevuti: 0};
         for(var i in dati.Acchitto) { dati1.acchitto = dati1.acchitto + dati.Acchitto[i].pts; }
         for(var i in dati.Accosto) { dati1.accosto = dati1.accosto + dati.Accosto[i].pts; }
         for(var i in dati.Bocciata) { dati1.bocciata = dati1.bocciata + dati.Bocciata[i].pts; }
         for(var i in dati.Calcio) { dati1.calcio = dati1.calcio +dati.Calcio[i].pts; }
         for(var i in dati.Bevuti) { dati1.bevuti = dati1.bevuti +dati.Bevuti[i].pts; }
-        //tipi1.push({ accosto: dati1.accosto, acchitto: dati1.acchitto, bocciata: dati1.bocciata, calcio: dati1.calcio, bevuti: dati1.bevuti});
+
         var dati = _.groupBy($localStorage.p2ScoreByType, 'type');
         var dati2 = {acchitto: 0, accosto : 0, bocciata : 0, calcio : 0, bevuti: 0};
         for(var i in dati.Acchitto) { dati2.acchitto = dati2.acchitto + dati.Acchitto[i].pts; }
@@ -78,12 +80,41 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
         for(var i in dati.Calcio) { dati2.calcio = dati2.calcio +dati.Calcio[i].pts; }
         for(var i in dati.Bevuti) { dati2.bevuti = dati2.bevuti +dati.Bevuti[i].pts; }
 
-        tipi.push({tipo: 'Acchitto', p1: dati1.acchitto, p2: dati2.acchitto})
-        tipi.push({tipo: 'Accosto', p1: dati1.accosto, p2: dati2.accosto})
-        tipi.push({tipo: 'Bocciata', p1: dati1.bocciata, p2: dati2.bocciata})
-        tipi.push({tipo: 'Calcio', p1: dati1.calcio, p2: dati2.calcio})
-        tipi.push({tipo: 'Bevuti', p1: dati1.bevuti, p2: dati2.bevuti})
-        //console.log(tipi)
+        tipi.push({
+            tipo: 'Acchitto',
+            p1: dati1.acchitto,
+            p1p: dati1.acchitto/tot1,
+            p2: dati2.acchitto,
+            p2p: dati2.acchitto/tot2
+        })
+        tipi.push({
+            tipo: 'Accosto',
+            p1: dati1.accosto,
+            p1p: dati1.accosto/tot1,
+            p2: dati2.accosto,
+            p2p: dati2.accosto/tot2
+        })
+        tipi.push({
+            tipo: 'Bocciata',
+            p1: dati1.bocciata,
+            p1p: dati1.bocciata/tot1,
+            p2: dati2.bocciata,
+            p2p: dati2.bocciata/tot2
+        })
+        tipi.push({
+            tipo: 'Calcio',
+            p1: dati1.calcio,
+            p1p: dati1.calcio/tot1,
+            p2: dati2.calcio,
+            p2p: dati2.calcio/tot2
+        })
+        tipi.push({
+            tipo: 'Bevuti',
+            p1: dati1.bevuti,
+            p1p: dati1.bevuti/tot1,
+            p2: dati2.bevuti,
+            p2p: dati2.bevuti/tot2
+        })
 
         $scope.tableParams1 = new ngTableParams(
             {
@@ -97,7 +128,6 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
                 },
                 counts: []
             });
-
     }else{
         $scope.messaggio = "Non ci sono partite in corso da visualizzare";
     }
@@ -106,10 +136,10 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
 
 .controller('StatsCtrl2', function($scope, $stateParams, $localStorage, $sessionStorage) {
     //console.log($localStorage.sets.length);
-    //if($localStorage.sets == 0) {
-        //$scope.messaggio = "Non ci sono partite da visualizzare";
-        //return ;
-    //}
+    if($localStorage.sets == 0) {
+        $scope.messaggio = "Non ci sono partite da visualizzare";
+        return ;
+    }
     $scope.giocatore1 = $localStorage.partita[0]['giocatore1'];
     $scope.giocatore2 = $localStorage.partita[0]['giocatore2'];
 
@@ -277,12 +307,12 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
             $localStorage.partita[0]['score1'] = $scope.p1Score;
 
             if ($scope.p1Score < 0) {
-                $scope.p1Score = 0;
+                $scope.p1Score = '';
             }
-            $scope.form1.score = 0;
+            $scope.form1.score = '';
         }
         else {
-            $scope.form1.score = 0;
+            $scope.form1.score = '';
         }
     };
 
@@ -300,12 +330,12 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'] )
             $localStorage.partita[0]['score2'] = $scope.p2Score;
 
             if ($scope.p2Score < 0) {
-                $scope.p2Score = 0;
+                $scope.p2Score = '';
             }
-            $scope.form2.score = 0;
+            $scope.form2.score = '';
         }
         else {
-            $scope.form2.score = 0;
+            $scope.form2.score = '';
         }
     };
 

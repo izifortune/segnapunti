@@ -34,6 +34,13 @@ module.exports = [
         "clobbers": [
             "datePicker"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.splashscreen/www/splashscreen.js",
+        "id": "org.apache.cordova.splashscreen.SplashScreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -42,7 +49,8 @@ module.exports.metadata =
     "org.apache.cordova.console": "0.2.7",
     "org.apache.cordova.device": "0.2.8",
     "org.apache.cordova.statusbar": "0.1.3",
-    "com.plugin.datepicker": "0.3.0"
+    "com.plugin.datepicker": "0.3.0",
+    "org.apache.cordova.splashscreen": "0.3.0"
 }
 // BOTTOM OF METADATA
 });

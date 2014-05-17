@@ -5,12 +5,12 @@
 <ion-content class="has-header">
 
 <div class="list">
-    <div class="item item-divider">
+    <div class="item item-divider" ng-if="tableParams">
         Dati partita
     </div>
-    <div class="item" >
+    <div class="item" ng-if="tableParams">
 
-        <table ng-table="tableParams" class="table"  export-csv="csv">
+        <table ng-table="tableParams" class="table">
             <tr>
                 <th width="20px">Set</th>
                 <th width="180px">{{giocatore1}}</th>
@@ -22,29 +22,29 @@
                 <td data-title="'Punti'" align="right">{{s.p2}}</td>
             </tr>
         </table>
-        <div class="col">
-            <!--<a class="btn btn-primary" ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv">Exporta CSV</a>-->
-        </div>
     </div>
 
-    <div class="item">
-        <table ng-table="tableParams1" class="table" export-csv="csv1">
+    <div class="item" ng-if="tableParams1">
+        <table ng-table="tableParams1" class="table">
             <tr>
                 <th width="20px"></th>
                 <th width="180px">{{giocatore1}}</th>
+                <th></th>
                 <th width="180px">{{giocatore2}}</th>
+                <th></th>
             </tr>
             <tr ng-repeat="t in $data">
                 <td>{{t.tipo}}</td>
                 <td data-title="'Punti'">{{t.p1}}</td>
+                <td data-title="'Punti'">{{( 100*t.p1p )|number:1}}%</td>
                 <td data-title="'Punti'">{{t.p2}}</td>
+                <td data-title="'Punti'">{{( 100*t.p2p )|number:1}}%</td>
             </tr>    
         </table>    
-        <div class="col">
-            <!--<a class="btn btn-primary" ng-mousedown="csv1.generate()" ng-href="{{ csv1.link() }}" download="tipi_punto.csv">Exporta CSV</a>-->
-        </div>
     </div>
-    
+     <div class="item" ng-if="messaggio">
+        {{messaggio}}
+    </div>
     
 </div>
 
