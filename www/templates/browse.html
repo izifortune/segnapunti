@@ -42,10 +42,13 @@
             </tr>    
         </table>    
     </div>
-     <div class="item" ng-if="messaggio">
+    <div ng-if="chart">
+        <canvas barchart options="barOptions" data="chart" width="320" height="300"></canvas><br />
+    </div>
+    <div class="item" ng-if="messaggio">
         {{messaggio}}
     </div>
-    
+
 </div>
 
 

@@ -128,6 +128,46 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'])
                 },
                 counts: []
             });
+
+            // l'istogramma
+            $scope.chart = {
+                labels : ["Accosto", "Acchitto", "Bocciata", "Calcio", "Bevuti"],
+                datasets : [
+                    {
+                    fillColor : "rgba(220,0,0,0.7)", strokeColor : "rgba(0,0,0,0.5)",
+                    data : [dati1.accosto, dati1.acchitto, dati1.bocciata, dati1.calcio, dati1.bevuti]
+                },
+                {
+                    fillColor : "rgba(225,225,225,0.7)", strokeColor : "rgba(0,0,0,0.5)",
+                    data : [dati2.accosto, dati2.acchitto, dati2.bocciata, dati2.calcio, dati2.bevuti]
+                }
+                ]
+            }
+
+            $scope.barOptions = {
+                scaleOverlay : false,
+                scaleOverride : false,
+                scaleStartValue : 0,
+                scaleLineColor : "rgba(0,0,0,.1)",
+                scaleLineWidth : 1,
+                scaleShowLabels : true,
+                scaleLabel : "<%=value%>",
+                scaleFontFamily : "'Arial'",
+                scaleFontSize : 12,
+                scaleFontStyle : "normal",
+                scaleFontColor : "#666",
+                scaleShowGridLines : true,
+                scaleGridLineColor : "rgba(0,0,0,.05)",
+                scaleGridLineWidth : 1,
+                barShowStroke : true,
+                barStrokeWidth : 2,
+                barValueSpacing : 5,
+                barDatasetSpacing : 1,
+                animation : false,
+                animationSteps : 60,
+                animationEasing : "easeOutQuart",
+                onAnimationComplete : null
+            }
     }else{
         $scope.messaggio = "Non ci sono partite in corso da visualizzare";
     }
@@ -173,22 +213,6 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'])
         ]
     }
 
-    $scope.chart1 = [
-        { value : dati1.accosto, color: "#D97041" },
-        { value : dati1.acchitto, color: "#C7604C" },
-        { value : dati1.bocciata, color: "#21323D" },
-        { value : dati1.calcio, color: "#9D9B7F" },
-        { value : dati1.bevuti, color: "#000000" },
-    ]
-
-    $scope.chart2 = [
-        { value : dati2.accosto, color: "#D97041" },
-        { value : dati2.acchitto, color: "#C7604C" },
-        { value : dati2.bocciata, color: "#21323D" },
-        { value : dati2.calcio, color: "#9D9B7F" },
-        { value : dati2.bevuti, color: "#000000" },
-    ]
-
     $scope.barOptions = {
         scaleOverlay : false,
         scaleOverride : false,
@@ -213,34 +237,6 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'])
         animationEasing : "easeOutQuart",
         onAnimationComplete : null
     }
-
-    $scope.polarOptions =  {
-        scaleOverride : false,
-        scaleSteps : 6,
-        scaleStartValue : 0,
-        scaleShowLine : true,
-        scaleLineColor : "rgba(0,0,0,.1)",
-        scaleLineWidth : 1,
-        scaleShowLabels : true,
-        scaleLabel : "<%=value%>",
-        scaleFontFamily : "'Arial'",
-        scaleFontSize : 12,
-        scaleFontStyle : "normal",
-        scaleFontColor : "#666",
-        scaleShowLabelBackdrop : true,
-        scaleBackdropColor : "rgba(255,255,255,0.75)",
-        scaleBackdropPaddingY : 2,
-        scaleBackdropPaddingX : 2,
-        segmentShowStroke : true,
-        segmentStrokeColor : "#fff",
-        segmentStrokeWidth : 2,
-        animation : false,
-        animationSteps : 100,
-        animationEasing : "easeOutBounce",
-        animateRotate : true,
-        animateScale : false,
-        onAnimationComplete : null
-    };
 
 })
 
