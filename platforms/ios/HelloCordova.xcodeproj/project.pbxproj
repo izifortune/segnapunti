@@ -42,6 +42,7 @@
 		0607CCA483CF46678CD26CF8 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 677A00C939FB419297D564D4 /* CDVDevice.m */; };
 		BADDA18BD7B54E2A8266483A /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E4EDA6F43E6C4942BF88349E /* CDVStatusBar.m */; };
 		6E06B3F795FE4B85B87D3D97 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6E91D10CC14D18AB5AD5A0 /* DatePicker.m */; };
+		1DDEFB725BF6479F8594D8B6 /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 271146AB94C2464FB987F218 /* CDVSplashScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,8 @@
 		16372A7E0D234422B6E04B6A /* CDVStatusBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVStatusBar.h"; path = "org.apache.cordova.statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		DF6E91D10CC14D18AB5AD5A0 /* DatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "DatePicker.m"; path = "com.plugin.datepicker/DatePicker.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		93CC324162BD463B97D88F4D /* DatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "DatePicker.h"; path = "com.plugin.datepicker/DatePicker.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		271146AB94C2464FB987F218 /* CDVSplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVSplashScreen.m"; path = "org.apache.cordova.splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		356400B3EF784C338F87BDD4 /* CDVSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSplashScreen.h"; path = "org.apache.cordova.splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +245,8 @@
 				16372A7E0D234422B6E04B6A /* CDVStatusBar.h */,
 				DF6E91D10CC14D18AB5AD5A0 /* DatePicker.m */,
 				93CC324162BD463B97D88F4D /* DatePicker.h */,
+				271146AB94C2464FB987F218 /* CDVSplashScreen.m */,
+				356400B3EF784C338F87BDD4 /* CDVSplashScreen.h */,
 			);
 			name = Plugins;
 			path = "HelloCordova/Plugins";
@@ -440,6 +445,7 @@
 				0607CCA483CF46678CD26CF8 /* CDVDevice.m in Sources */,
 				BADDA18BD7B54E2A8266483A /* CDVStatusBar.m in Sources */,
 				6E06B3F795FE4B85B87D3D97 /* DatePicker.m in Sources */,
+				1DDEFB725BF6479F8594D8B6 /* CDVSplashScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

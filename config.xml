@@ -13,6 +13,10 @@
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
+
+    <preference name="SplashScreen" value="ic_launcher" />
+    <preference name="SplashScreenDelay" value="10000" />
+
     <feature name="StatusBar">
       <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>

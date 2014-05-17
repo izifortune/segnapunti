@@ -40,16 +40,30 @@
     width: 400px;
 }
 
+.table, tbody, tfoot {
+    margin: 0 0.5em;
+}
 
+.table td.sets {
+    background-color: blue;
+    color: white;
+    text-align: center;
+}
 
 .table th {
+    background-color: black;
+    color: white;
     font-weight: bold;
     padding: 4px;
     text-align: right;
+    border-left:2px solid black;
+    border-right:2px solid black;
 }
 
 .table tbody td {
-    padding: 4px;
+    padding: 6px;
     text-align: right;
-    border-bottom: 1px solid black;
+    border-bottom:2px solid black;
+    border-left:2px solid black;
+    border-right:2px solid black;
 }

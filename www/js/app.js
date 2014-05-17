@@ -8,84 +8,84 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 
 .run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
+    $ionicPlatform.ready(function() {
+        if(window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+    });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+    $stateProvider
 
     .state('app', {
-      url: "/app",
-      abstract: true,
-      templateUrl: "templates/menu.html",
-      controller: 'AppCtrl'
+        url: "/app",
+        abstract: true,
+        templateUrl: "templates/menu.html",
+        controller: 'AppCtrl'
     })
 
     .state('app.browse', {
-      url: "/browse",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/browse.html",
-          controller : 'BrowseGamesCtrl'
+        url: "/browse",
+        views: {
+            'menuContent' :{
+                templateUrl: "templates/browse.html",
+                controller : 'BrowseGamesCtrl'
+            }
         }
-      }
     })
 
     .state('app.chart', {
-      url: "/chart2",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/stats.html",
-          controller : 'StatsCtrl2'
+        url: "/chart2",
+        views: {
+            'menuContent' :{
+                templateUrl: "templates/stats.html",
+                controller : 'StatsCtrl2'
+            }
         }
-      }
     })
 
     .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
+        url: "/playlists",
+        views: {
+            'menuContent' :{
+                templateUrl: "templates/playlists.html",
+                controller: 'PlaylistsCtrl'
+            }
         }
-      }
     })
 
     .state('app.newgame', {
-      url: '/newgame',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/newgame.html',
-          controller: 'NewgameCtrl'
+        url: '/newgame',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/newgame.html',
+                controller: 'NewgameCtrl'
+            }
         }
-      }
     })
 
     .state('app.gamedata', {
-      url: '/gamedata/:gameId',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/newgame.html',
-          controller: 'NewgameCtrl'
+        url: '/gamedata/:gameId',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/newgame.html',
+                controller: 'NewgameCtrl'
+            }
         }
-      }
     })
 
     .state('app.single', {
-      url: "/playlists/:playlistId",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/playlist.html",
-          controller: 'PlaylistCtrl'
+        url: "/playlists/:playlistId",
+        views: {
+            'menuContent' :{
+                templateUrl: "templates/playlist.html",
+                controller: 'PlaylistCtrl'
+            }
         }
-      }
     });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/playlists');
 });
 

@@ -3,22 +3,52 @@
 <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
 </ion-nav-buttons>
 <ion-content class="has-header">
-<h4>Dati partita</h4>
 
+<div class="list">
+    <div class="item item-divider" ng-if="tableParams">
+        Dati partita
+    </div>
+    <div class="item" ng-if="tableParams">
 
-<div class="col">
-    <table ng-table="tableParams" class="table">
-        <tr>
-            <th>Set</th>
-            <th width="60px">{{giocatore1}}</th>
-            <th width="60px">{{giocatore2}}</th>
-        </tr>
-        <tr ng-repeat="s in $data">
-            <td data-title="'Set'">{{s.set}}</td>
-            <td data-title="'Punti'" align="right">{{s.p1}}</td>
-            <td data-title="'Punti'" align="right">{{s.p2}}</td>
-        </tr>
-    </table>
+        <table ng-table="tableParams" class="table">
+            <tr>
+                <th width="20px">Set</th>
+                <th width="180px">{{giocatore1}}</th>
+                <th width="180px">{{giocatore2}}</th>
+            </tr>
+            <tr ng-repeat="s in $data">
+                <td class="sets" data-title="'Set'">{{s.set}}</td>
+                <td data-title="'Punti'" align="right">{{s.p1}}</td>
+                <td data-title="'Punti'" align="right">{{s.p2}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="item" ng-if="tableParams1">
+        <table ng-table="tableParams1" class="table">
+            <tr>
+                <th width="20px"></th>
+                <th width="180px">{{giocatore1}}</th>
+                <th></th>
+                <th width="180px">{{giocatore2}}</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="t in $data">
+                <td>{{t.tipo}}</td>
+                <td data-title="'Punti'">{{t.p1}}</td>
+                <td data-title="'Punti'">{{( 100*t.p1p )|number:0}}%</td>
+                <td data-title="'Punti'">{{t.p2}}</td>
+                <td data-title="'Punti'">{{( 100*t.p2p )|number:0}}%</td>
+            </tr>    
+        </table>    
+    </div>
+    <div ng-if="chart">
+        <canvas barchart options="barOptions" data="chart" width="320" height="300"></canvas><br />
+    </div>
+    <div class="item" ng-if="messaggio">
+        {{messaggio}}
+    </div>
+
 </div>
 
 
