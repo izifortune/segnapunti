@@ -305,10 +305,10 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'])
             if ($scope.p1Score < 0) {
                 $scope.p1Score = '';
             }
-            $scope.form1.score = '';
+            $scope.form1.score = 0;
         }
         else {
-            $scope.form1.score = '';
+            $scope.form1.score = 0;
         }
     };
 
@@ -328,10 +328,10 @@ angular.module('starter.controllers', ['ngStorage', 'angles', 'ngTable'])
             if ($scope.p2Score < 0) {
                 $scope.p2Score = '';
             }
-            $scope.form2.score = '';
+            $scope.form2.score = 0;
         }
         else {
-            $scope.form2.score = '';
+            $scope.form2.score = 0;
         }
     };
 
