@@ -36,9 +36,9 @@
             <tr ng-repeat="t in $data">
                 <td>{{t.tipo}}</td>
                 <td data-title="'Punti'">{{t.p1}}</td>
-                <td data-title="'Punti'">{{( 100*t.p1p )|number:1}}%</td>
+                <td data-title="'Punti'">{{( 100*t.p1p )|number:0}}%</td>
                 <td data-title="'Punti'">{{t.p2}}</td>
-                <td data-title="'Punti'">{{( 100*t.p2p )|number:1}}%</td>
+                <td data-title="'Punti'">{{( 100*t.p2p )|number:0}}%</td>
             </tr>    
         </table>    
     </div>
